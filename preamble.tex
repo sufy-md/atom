@@ -1,0 +1,82 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{commath}
+\usepackage[margin=0.5in]{geometry}
+% \usepackage{lexend}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{tkz-euclide}
+\usepackage{xparse}
+
+\usetikzlibrary{calc,angles,quotes, positioning, shapes.geometric}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+\newtheorem{clm}{Claim}
+\newtheorem{asn}{Assertion}
+\newtheorem{thm}{Theorem}
+\newtheorem{prb}{Problem}
+\newtheorem{ans}{Answer}
+\newtheorem{lm}{Lemma}
+\newtheorem{rmk}{Remark}
+\newtheorem{crl}{Corollary}
+\newtheorem{ex}{Exercise}
+\newtheorem{xmp}{Example}
+
+\newcommand{\titleheader}[1]{\begin{centering}
+\begin{LARGE}
+\textbf{#1}
+\end{LARGE}\\
+\hrulefill
+
+\vspace{-1.25\baselineskip}
+\hrulefill
+\end{centering}\\\\}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+
+\NewDocumentEnvironment{smrg}{}{\begin{changemargin}{0.5cm}{0.5cm}}{\end{changemargin}}
+
+\NewDocumentEnvironment{SWP}{m m}
+{%
+  \vspace{-.9cm}%
+  \begin{changemargin}{0.5cm}{0.5cm}%
+  \noindent#1~#2
+  \par
+  \textbf{Proof.} 
+}
+{%
+  \qed
+  \end{changemargin}
+}
+
+\NewDocumentEnvironment{SNP}{m}
+{%
+  \vspace{-.9cm}%
+  \begin{changemargin}{0.5cm}{0.5cm}%
+  \noindent#1
+}
+{%
+  \end{changemargin}
+}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\st}{\space \mid \space}
+\newcommand{\union}[1]{\displaystyle\mathop{\cup}\limits_{#1}}
+\newcommand{\intersect}[1]{\displaystyle\mathop{\cap}\limits_{#1}}
+\newcommand{\paran}[1]{\left ( {#1} \right )}
+\newcommand{\contra}{$\rightarrow\!\leftarrow$}
+\newcommand{\kvec}[2]{({#1}_1 \dots {#1}_{#2})}
+\newcommand{\pf}{\textbf{Proof.} }
+
+\newcommand{\AnswerSection}{
+    \newpage
+    \section*{Answers to Exercises}
+    \textit{The following are brief solutions or hints. You are encouraged to review the exercises before checking the answers.}
+}

@@ -1,0 +1,100 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{More on Definitions and Direct Proofs}
+In the previous discussion we saw a proof for the fact that the square of an even number is even. This ``obvious'' fact was proven with the help of the definition of an even number - a gateway from our understanding to precise, rigorous statements.
+
+For this discussion I want to revisit the proof and point out a nuance. Albeit seemingly insignificant, the word ``any'' holds a lot of weight in the problem, and we will see how it affects our approach.
+
+Other than that, we will have a look at another proof, one you may be familiar with from Real Analysis. This will lead us to another approach to proofs, but all in due time.
+
+\section*{A Revisit to Squaring Numbers}
+In the stated problem, I want you to focus on the word \textit{``an''}. Show that the square of \textit{an} even number is even.
+
+Suppose I were to rewrite the problem. Show that the square of $2$ is even. Or $22$. Or $46$. Or $8937508$. ``Easy'', you'll say. Just square the number and it'll come out to be even.
+
+But the task that we're handed is different. You're given an \textit{arbitrary} even number. You have absolutely no clue how many digits it has, what it looks like, so you can't just square it and call it a day.
+
+No, you have to work harder. You have to think about what an even number actually is. ``A number of the form $2m$ with $m$ an integer'' (notice the specification). You have to square it and then show that the resulting number is again of the same form. Only then do you get your reward.
+
+Point of emphasis - when given something \textit{general} - you have to think about what more fundamental properties the object has, rather than the object itself. When I'm completing the proof, I'm \textbf{not} thinking about a specific even number, I'm starting with some property that \textit{all} even numbers have, so that my proof is airtight.
+
+You have to pay attention to these small things. I'll try to point out as many as possible, but it is equally your duty to be on the lookout.
+
+\section*{A Canonical Example}
+There is a very high likelihood that you know what a sequence of real numbers is; and that if two sequences are such that $\{a_n\} \rightarrow A$ and $\{b_n\} \rightarrow B$, then the sequence given by their sum has the property $\{a_n + b_n\} \rightarrow A + B$.
+
+Just for clarity, $\{a_n\} \rightarrow A$ signifies that the sequence $\{a_n\}$ converges to the number $A$.
+
+Consider, then, the following problem.
+
+\begin{SNP}{\xmp}Given two convergent sequences, show that the sequence formed by adding their terms converges to the sum of the limits.\end{SNP}
+
+Again, a direct proof. Given something holds, verify something else holds. But ITS SO OBVIOUS! WHAT ELSE COULD IT BE!
+
+What do we do when we have to verify something obvious? We verify the definition. What is the definition of a sequence converging somewhere?
+
+Well, I could write out
+$$
+\forall \space \epsilon > 0 \space \exists \space N \in \mathbb N, \space n \geq N \implies |a_n - A| < \epsilon
+$$
+but that makes no sense.
+
+Or, I could be gentle, and write out
+\begin{SNP}{\dfn} Say a sequence $\{a_n\}$ converges to $A$ if for every $\epsilon > 0$, some infinite tail of the sequence falls within $\epsilon$ distance of $A$.\end{SNP}
+
+Much cleaner, much more intuitive without the unnecessary symbols. Given a positive number $\epsilon$, all points of the sequence beyond some $N$ fall within $\epsilon$ distance of the limit. That gives you a much clearer picture than whatever unholy amalgamation of symbols I wrote above.
+
+So, just knowing the definition sometimes isn't enough. You really have to know what it's trying to convey.
+
+Now that I have the definition, I can complete steps 1 and 2 of the overall outline.
+
+\begin{enumerate}
+    \item Start with what's given.
+    \item Use definitions
+\end{enumerate}
+
+So, our proof starts somewhat like
+\begin{smrg}
+    \textbf{Proof.} Let $\{a_n\}$ and $\{b_n\}$ be two sequences such that $\{a_n\} \rightarrow A$ and $\{b_n\} \rightarrow B$.\hfill{\footnotesize\itshape(1. starting with what's given)}\\
+    Then for every $\epsilon_1 > 0$, there exists $N_a \in \bb N$ such that for all $n \geq N_a$, $|a_n - A| < \epsilon_1$.\hfill{\footnotesize\itshape(2. using the definition)}\\
+    Similarly, for every $\epsilon_2 > 0$, there exists $N_b \in \bb N$ such that for all $n \geq N_b$, $|b_n - B| < \epsilon_2$.\hfill{\footnotesize\itshape(3. using the definition again)}\\
+\end{smrg}
+
+Step 3 is to start working towards what you want. I want to show that given an $\epsilon > 0$, the existence of an $N$ such that $n \geq N \implies |(a_n + b_n) - (A + B)| < \epsilon$.
+
+So let $\epsilon > 0$ be given. Notice the LHS of the above inequality. If we apply the triangle inequality to this, we get $$|(a_n + b_n) - (A+B)| \leq |a_n - A| + |b_n - B|$$
+
+This accounts for step 3. Use what you're given (all numbers involved are real and thus the triangle inequality applies) to make things easy.
+
+What have I made easy here? Well, two things. First, if I can bound the RHS by $\epsilon$, I'm done.
+
+Second, I ALREADY have bounds on the RHS. Given any $\epsilon_1, \epsilon_2$, I can always bound the RHS by $\epsilon_1 + \epsilon_2$ by taking the $\text{max}$ of the corresponding $N_1$ and $N_2$.
+
+So all I need is a clever choice of $\epsilon_1$ and $\epsilon_2$ that bounds the RHS by $\epsilon$. This is step 4. Be clever with your simplified system and you're done.
+
+If I can get $\epsilon_1$ and $\epsilon_2$ to sum to $\epsilon$, I'm done. Which leads to the natural choice of $\frac \epsilon 2$. This concludes step 4.
+
+The final step is to establish the existence of $N$ for the given $\epsilon$. Well, choose $N_1$ and $N_2$ so that they satisfy the definition of convergence of $a_n$ and $b_n$ with $\frac \epsilon 2$ in place of $\epsilon$. Choosing the max of these $N_1$ and $N_2$ as $N$ satisfies the inequality in step 3 and hence the required inequality.
+
+See if you can write the proof in full. The final proof should look something like this:
+\begin{smrg}
+\textbf{Proof.} Let $\{a_n\}$ and $\{b_n\}$ be two sequences such that $\{a_n\} \rightarrow A$ and $\{b_n\} \rightarrow B$.\hfill{\footnotesize\itshape(1. starting with what's given)}\\
+Then for every $\epsilon_1 > 0$, there exists $N_a \in \bb N$ such that for all $n \geq N_a$, $|a_n - A| < \epsilon_1$.\hfill{\footnotesize\itshape(2. using the definition)}\\
+Similarly, for every $\epsilon_2 > 0$, there exists $N_b \in \bb N$ such that for all $n \geq N_b$, $|b_n - B| < \epsilon_2$.\hfill{\footnotesize\itshape(3. using the definition again)}\\
+
+Let $\epsilon > 0$ be given. Choose $\epsilon_1 = \epsilon_2 = \frac \epsilon 2$.\hfill{\footnotesize\itshape(4. clever choice)}\\
+Then there exists $N_a \in \bb N$ such that for all $n \geq N_a$, $|a_n - A| < \frac \epsilon 2$ and $N_b \in \bb N$ such that for all $n \geq N_b$, $|b_n - B| < \frac \epsilon 2$.\hfill{\footnotesize\itshape(5. using the definition again)}\\
+
+Let $N = \max(N_a, N_b)$. Then for all $n \geq N$, we have
+$$|(a_n + b_n) - (A + B)| \leq |a_n - A| + |b_n - B| < \frac \epsilon 2 + \frac \epsilon 2 = \epsilon$$
+Thus $\{a_n + b_n\} \rightarrow A + B$.\qed
+\end{smrg}
+
+This proof is a bit more complex than the previous one, but it still follows the same structure. You start with what's given, use definitions, simplify the problem, and then conclude with the required result.\\
+
+\hrule
+
+Go through the proof. Understand where steps 1 -- 5 show up (it may not be in order). If I'm introducing a new variable, understand where it's coming from. Try to understand why $\dfrac \epsilon 2$ is the natural choice and not, say, $1$ and $\epsilon - 1$.
+
+Once you're ready, move on to the next discussion.
+\end{document}

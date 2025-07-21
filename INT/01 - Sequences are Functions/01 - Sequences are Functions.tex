@@ -1,0 +1,45 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Sequences are Functions}
+A \emph{sequence}, essentially, is a list of things -- numbers, points, sets, could be anything.
+
+\begin{itemize}
+	\item An arithmetic progression is a sequence, where the $n-$th term is given by $a + (n - 1)d$. This is a countably infinite list of numbers
+	\item Consider the polynomial $x^3 - x$. This has zeros at $-1, 0, 1$. This is a finite list of numbers.
+	\item Consider the lines in the Cartesian plane of slope $4$, the general given by $y = 4x + c$ where $c$ is a real number. This is an \emph{uncountable} list of sets (since lines are sets).
+	\item Suppose there is a set, $\mathcal F$, that contains functions from a set $A$ to another set $B$. Fix some $a \in A$. Then we can list out the values $a$ takes across different functions in $\mathcal F$, and refer to the value $f(a)$ by $a_f$ instead. This is a list of elements of $B$.
+\end{itemize}
+
+You should notice, that each list, i.e., each sequence, is written \emph{with respect to} elements of some other set.
+
+\begin{itemize}
+	\item The terms of an arithmetic progression are defined by a parameter $n \in \bb N$ - so they're listed with respect to $\bb N$. i.e., each element of the progression is \emph{referred to} by an element of $\bb N$
+	\item A little subtle, but if we say that the roots of the polynomial are $\lambda_1, \lambda_2,$ and $\lambda_3$; we implicitly list the roots with respect to the set $\{1, 2, 3\}$. i.e., each of the roots is \emph{referred to} by an element of the set.
+	\item This should be the clearest one. Each line $y = 4x + c$ is \emph{referred to} by a real number $c$, and thus the sequence is with respect to $\bb R$
+	\item Each value is \emph{referred to} by some function $f \in \mathcal F$, and thus the sequence is with respect to $\mathcal F$
+\end{itemize}
+
+If a sequence is written with respect to a set $\mathcal I$, we usually say it is \emph{indexed by} $\mathcal I$. For example, consider an AP with $a = 2$ and $d = 3$.
+
+Then the set
+$$
+\{2, 5, 8, 11 \dots\}
+$$
+is indexed by $\bb N$ and
+$$a_n = 2 + 3(n - 1) = 3n -1$$
+Observe -- when we index a set $S$ with respect to another set $\mathcal I$ -- then for each $\iota \in \mathcal I$ there must be some element $s_\iota \in S$. Think of the indexing set as an actual index. For each chapter listed in the index of a book, a chapter exists in the actual content. Similarly, for each element in the index set, an element exists in the set being indexed. So for example, if a set is indexed by the natural numbers, it makes sense to say ``the $n$th element'' of that set. Does an $n-$th real number make sense? No. Does the $n-$th term of an AP make sense? Yes.
+
+Thus, intuitively, every sequence is a list with respect to some index set. We've established that if we index some set $S$ with respect to $\mathcal I$, then ``the $\iota$-th element of $S$'' with $\iota \in \mathcal I$ should make sense.
+
+Where have we seen this before? I have a set ($\mathcal I$), and for each element of the set ($\iota$), I want to assign it an element ($s_\iota$) of another set ($S$).
+
+Indeed, a \emph{function} is something that does exactly this!
+
+Therefore, for a set $S$ and an index set $\mathcal I$, it makes sense to define a sequence as
+\begin{SNP}{\dfn
+}{An $S$-valued sequence indexed by $\mathcal I$ is a function $f: \mathcal I \rightarrow S$
+}
+\end{SNP}
+
+And indeed, the informal $s_\iota$ can be replaced by the formal $f(\iota)$, although the former can still be used as shorthand. (In fact, you list arithmetic progressions using that shorthand! $\kvec{a}{n}$ etc.)
+\end{document}

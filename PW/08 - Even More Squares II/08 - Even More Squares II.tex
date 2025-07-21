@@ -1,0 +1,194 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Even More on Squares}
+I want to take a moment to emphasize the importance of recognising antecedents and consequents in compound statements.
+
+In the last discussion we recognised that that the Pythagorean theorem holds if and only if the cosine rule holds.
+
+When I say ``Pythagorean Theorem holds'', I don't mean it applies. I mean that it is true. So; the Pythagorean Theorem is true if and only if the cosine rule is true.
+
+You'll see what I'm trying to say once I write down these statements a little more precisely.
+
+\section*{The Pythagorean Theorem}
+The cosine rule is simple, for \textit{any} triangle $ABC$, $b^2 = a^2 + c^2 -2ac\cos\beta$.
+
+The Pythagoras Theorem states that for a right triangle $DEF$ right angled at $E$, $e^2 = d^2 + f^2$. In fact, this is an equivalence. Let's have a look.
+
+To prove an equivalence, we need to prove both implications, for which antecedents and consequents should be clear.
+
+I will show the following statement.
+\begin{SNP}{\thm}In a triangle $ABC$, the angle $A$ is right if and only if $a^2 = b^2 + c^2$.
+\end{SNP}
+\begin{smrg}
+\textbf{Proof.} $(\rightarrow)$ Here's our triangle. (I am having so much fun making these pictures in \LaTeX. It is exhausting but so satisfying.)
+\begin{center}
+    \begin{tikzpicture}[{scale=.45}]
+        \coordinate (A) at (0, 16.8) {};
+        \coordinate (B) at (15, 0) {};
+        \coordinate (C) at (-20, 0) {};
+        \coordinate (M) at (0, 0) {};
+        
+        \draw node at (M) [anchor=north] {M};
+        \draw node at (B) [anchor=north] {B};
+        \draw node at (C) [anchor=north] {C};
+        \draw node at (A) [anchor=south] {A};
+        \draw (C) -- (B) -- (A) -- (C);
+        \draw (A) -- (M);
+
+        \tkzMarkRightAngle[draw=black, size=1](A,M,B);
+        \tkzMarkRightAngle[draw=black, size=1](C,A,B);
+        
+        \tkzMarkAngle[fill=black,opacity=1,size=2](M,C,A);
+        \tkzLabelAngle[pos=2.5](M,C,A){$\gamma$};
+    
+        \tkzMarkAngle[fill=black,opacity=1,size=2](A,B,M);
+        \tkzLabelAngle[pos=2.5](A,B,M){$\beta$};
+
+        \draw[<->] ([yshift=-1.2cm]C) -- ([yshift=-1.2cm]M) node[midway, below]{$a_b$};
+        \draw[<->] ([yshift=-1.2cm]M) -- ([yshift=-1.2cm]B) node[midway, below]{$a_c$};
+        \draw[<->] ([xshift=+0.9cm]B) -- ([xshift=+0.9cm]A) node[midway, right]{$c$};
+        \draw[<->] ([xshift=-0.9cm]C) -- ([xshift=-0.9cm]A) node[midway, left]{$b$};
+        
+    \end{tikzpicture}
+\end{center}
+I've already assumed $\angle A$ is right. No probs, this was the antecedent anyway. Once you have this diagram everything falls into place nicely.
+
+$a_b = b\cos\gamma$ and $a_c = c\cos\beta$ are immediate. Borrowing the values of the cosines from the larger right triangle, we see that $a_b = \dfrac {b^2} a$ and $a_c = \dfrac {c^2} a$. Finally,
+
+\begin{align*}
+    a^2 &= a(a_b + a_c) \\
+    &= a\left(\dfrac {b^2} a + \dfrac {c^2} a\right) \\
+    &= b^2 + c^2
+\end{align*}
+\end{smrg}
+And done. Now for the opposite direction.
+\begin{smrg}
+$(\leftarrow)$ Consider a triangle $DEF$ that satisfies $e^2 = d^2 + f^2$.
+\begin{center}
+    \begin{tikzpicture}
+        \coordinate (E) at (0,0);
+        \coordinate (D) at (0, 8);
+        \coordinate (F) at (6, 0);
+
+        \draw node at (D) [anchor=south] {D};
+        \draw node at (E) [anchor=north] {E};
+        \draw node at (F) [anchor=north] {F};
+
+        \draw (D) -- (E) -- (F) -- (D);
+
+        % \tkzMarkRightAngle[draw=black, size=.55](D,E,F);
+        \tkzMarkAngle[fill=black,opacity=1,size=.75](E,D,F);
+        \tkzMarkAngle[fill=black,opacity=1,size=.75](D,F,E);
+
+        \tkzLabelAngle[pos=1.2](E,D,F){$\delta$};
+        \tkzLabelAngle[pos=1.2](D,F,E){$\phi$}
+
+        \draw[<->] ([yshift=-0.5cm]F) -- ([yshift=-0.5cm]E) node[midway, below]{d};
+        \draw[<->] ([xshift=-0.5cm]E) -- ([xshift=-0.5cm]D) node[midway, left]{f};
+        \draw[<->] ([xshift=+0.5cm]D) -- ([xshift=+0.5cm]F) node[midway, right]{e};
+        
+    \end{tikzpicture}
+\end{center}
+\end{smrg}
+What I will do here is borrow from Euclidean Geometry the side length formulae $d = 2R\sin\delta$, $f = 2R\sin\phi$, $e = 2R\sin(\pi - (\delta + \phi)) = 2R\sin(\delta + \phi)$
+\begin{smrg}
+Substituting into $e^2 = d^2 + f^2$ gives
+\[
+4R^2\sin^2\delta + 4R^2\sin^2\phi = 4R^2\sin^2(\delta + \phi)
+\]
+Expanding and cancelling like terms,
+\[
+\sin^2\delta + \sin^2\phi = \sin^2\delta\cos^2\phi+\sin^2\phi\cos^2\delta +2\sin\delta\sin\phi\cos\delta\cos\phi
+\]
+\end{smrg}
+What I'm about to do here (and its explanation later) could turn mind-bending, but try to follow through.
+
+Remember, I'm trying to prove that the square of the longest length is the sum of the squares of the other two sides iff the triangle is right-angled. I've already proven the right side implication and am currently proving the left one.
+\begin{smrg}
+Let's move some terms around.
+\[
+\sin^2\delta(1-\cos^2\phi) + \sin^2\phi(1-\cos^2\delta) = 2\sin\delta\sin\phi\cos\delta\cos\phi
+\]
+And finally,
+\[
+\sin^2\delta\sin^2\phi + \sin^2\phi\sin^2\delta = 2\sin\delta\sin\phi\cos\delta\cos\phi
+\]
+\end{smrg}
+Those of you who are still awake will spot it. I seem to have used the identity $\sin^2\theta + \cos^2\theta = 1$. But that holds iff the Pythagorean Theorem holds. But I'm proving the Pythagorean theorem? How can I use that as an assumption?
+
+Be assured, all is fine. I'll address it.
+\begin{smrg}
+Moving ahead,
+\[
+2\sin^2\delta\sin^2\phi = 2\sin\delta\sin\phi\cos\delta\cos\phi
+\]
+
+Since neither $\sin$ term is $0$, we can cancel them.
+\[
+\sin\delta\sin\phi - \cos\delta\cos\phi = 0
+\]
+Therefore
+\[
+\cos(\delta + \phi) = 0
+\]
+
+And therefore $\delta+\phi = \frac \pi 2$, Thus $\angle E = \pi - \frac \pi 2 = \frac \pi 2$ which concludes the proof.\qed
+\end{smrg}
+\section*{The Subtlety}
+So what about the little inconsistency that I left in? Well, for starters, Pythagorean Theorem refers only to the forward implication.
+
+That unnecessary detail aside, suppose the forward implication (\texttt{right angled implies sum of squares}) holds. That is enough to conclude the \texttt{$\sin^2 + \cos^2$} identity. (Think through this).
+
+What I've done above is first I prove the right side implication, and then \textit{use it} to prove the left side implication.
+
+I start out wanting to prove $p \iff q$. I first assumed $p$ and showed $q$, thus establishing $p \implies q$.
+
+Then when I get to the converse, I want to prove $q \implies p$. Thus I assume $q$, and want to show $p$. Along the way, I \textit{use} $p \implies q$. I use a statement that I have already established is true. You \textbf{can} do this. You cannot assume $p$ when setting out to prove $q \implies p$, but if you have already established $p \implies q$, you absolutely can use that.
+
+\section*{Despaghettification}
+You should have noticed there's a bunch of implications and equivalences surrounding the Pythagorean Theorem. So let's have a look at the whole picture.
+
+Let $r$ denote the statement \texttt{a given triangle is right angled}.
+
+Let $s$ denote the statement \texttt{the sum of squares of the smaller sides of a given triangle is equal to the square of the largest side}.
+
+Let $c$ denote the cosine rule for all triangles.
+
+Let $t$ denote the sine-cosine trigonometric identity for all angles.
+
+Finally, let $p$ denote the Pythagorean Theorem: $r \implies s$.
+
+We established earlier that $p \iff c$. Writing the compound statement, $(r \implies s) \iff c$.
+
+We established right now that $r \iff s$. Writing the proof, we used the implication $p \implies t$, or $(r \implies s) \implies t$.
+
+Note, $r \implies s$ and $(r \implies s) \implies t$ but $r \implies t$ is NOT a conclusion of this. $r \implies t$ is a completely different statement on its own (and doesn't even make sense).
+
+Similarly, $c \implies (r \implies s)$ but does $c$ imply either individually? No!
+
+Here's a visual representation of everything we discussed here.
+\[
+\begin{tikzcd}[column sep=huge, row sep=large]
+r \arrow[r, Rightarrow, "\text{Pythagorean Theorem}"] & s \arrow[r, Rightarrow, "\text{This note}"] & r\\
+p \arrow[r, Leftrightarrow, "\text{Definition of $p$}"] & (r \implies s) \arrow[d, Leftrightarrow, "\text{Pythagoras and sine-cosine are the same}"] & (s \implies r) \arrow [l, Leftarrow, "\text{$\leftarrow$ of Theorem 1}"] \\
+c \arrow[u, Leftrightarrow, swap, "\text{$p$ iff $c$}"] \arrow[r, Leftrightarrow] & t
+\end{tikzcd}
+\]
+
+\section*{Conclusion}
+Finally, when we prove $(r \implies s) \iff c$ and $r \iff s$,  \textit{neither proof has an impact on the other}.
+
+In the first, we assume the implication $r \implies s$ and prove $c$. The latter proof establishes that the implication $r \implies s$ is true. But again, IT DOES NOT ESTABLISH whether $r$ is true or whether $s$ is true.
+
+Take your time, read through this as many times as you need, and ask questions if necessary. As I said before, equivalences and implications in compound statements are tricky business. But as long as you're crystal clear on your hypothesis and conclusions, you're good to go.
+
+I said in the beginning,
+% i need a quote here
+\begin{quote}
+    When I say ``Pythagorean Theorem holds'', I don't mean it applies. I mean that it is true.
+\end{quote}
+
+Indeed, the implication $r \implies s$ is true. But for a triangle, if $r$ doesn't hold, I can't really do much with it, can I? The hypothesis doesn't hold, so the theorem doesn't \textit{apply}.
+
+Alright this one has gone on long enough. Seeya next.
+\end{document}

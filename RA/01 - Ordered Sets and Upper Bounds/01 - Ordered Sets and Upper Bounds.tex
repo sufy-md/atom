@@ -1,0 +1,32 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Ordered Sets and Upper Bounds}
+Our discussion of calculus begins at ordered sets. Calculus is done on the real numbers $\bb R$, and the properties that allow us to do calculus on $\bb R$ are closely linked with its order properties. Although that will not be a part of our main discussion, it is helpful to start there.
+\begin{SNP}{\dfn}{Let $S$ be a set. Let $<$ be a binary relation on $S$ satisfying
+\begin{itemize}
+	\item $<$ is antireflexive, i.e for any $a \in S$, $a \not < a$
+	\item $<$ is transitive, i.e if $a < b$ and $b < c$ then $a < c$
+	\item $<$ is total, i.e if $a \neq b$ then either $a < b$ or $b < a$
+\end{itemize}
+Under these circumstances, we say $S$ is \emph{totally ordered} and $<$ is an \emph{ordering} on $S$.}
+\end{SNP}
+
+All our familiar sets $\bb N, \bb Z, \bb Q, \bb R$ are ordered, while a set like $\bb C$ does not admit a natural ordering. It is, however, possible to define one. Consider two complex numbers $z_1 := x_1 + iy_1$ and $z_2 := x_2 + iy_2$. If $x_1 < x_2$ then declare $z_1 < z_2$, and vice versa. If at all $x_1 = x_2$, then do the same process with $y_1$ and $y_2$. If they are also equal, then $z_1$ and $z_2$ were already equal. Verify that this is a total ordering on $\bb C$.
+\begin{SNP}{\ex}{Show that if $a < b$, then $b \not < a$. (Hint. Suppose for some $a$ and $b$, both $a < b$ and $b < a$ happen. Use transitivity. Is this allowed?)}
+\end{SNP}
+Ordered sets are more or less intuitive. We just define a notion of being big or small on a set of objects.
+
+Consider some currency notes. $1, 2, 5, 10$ etc., except $2000$. We regard the set of currency notes $S = \{1, 2, 5, 10, 20, 50, 100, 200, 500\}$ as a subset of $\bb N$, and $2000$ as an element of $\bb N$.
+
+Observe that for every $s \in S$, $s < 2000$ holds. In this case we say that $2000$ is an \emph{upper bound} of $S$. In fact, $501, 502, 503 \dots$ are all upper bounds of $S$. A natural question at this stage is that ``is $500$ an upper bound of $S?$''. The answer is yes, and we will understand why shortly.
+
+For now, familiarise yourself with this definition
+\begin{SNP}{\dfn}{Let $S$ be a totally ordered set with ordering $<$, and let $E \subset S$ be a \textbf{nonempty} subset of $S$. Let $s \in S$ be such that for every $x \in E$, $x \leq s$. Then we say $s$ is an \emph{upper bound} of $E$. We also say $E$ is \emph{bounded above} by $s$.}
+\end{SNP}
+
+Note the use of $\leq$ in the definition. This is what allows $500$ to be an upper bound of the set of currency notes except $2000$. Why we allow this is something we shall explore later.
+
+\AnswerSection
+\ans If $a < b$ and $b < a$, then by transitivity $a < a$, which cannot happen.
+
+\end{document}

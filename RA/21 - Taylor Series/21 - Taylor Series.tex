@@ -1,0 +1,75 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Taylor Series}
+\textbf{Prereqs} RA-17, RA-18, RA-20
+
+Let $f$ be an infinitely differentiable function. More formally, suppose $f$ admits an $n-$th derivative near a point $a$ for every $n \in \bb N$. Then, $f$ admits the $n-$th Taylor Polynomial near $a$
+$$
+P_n(x) := f(a) + (x - a)\cdot f'(a) + \dfrac{(x - a)^2}{2}\cdot f''(a) + \dots + \dfrac{(x - a)^n}{n!}\cdot f^{(n)}(a)
+$$
+for every $n \in \bb N$.
+
+In the limit as $n\to \infty$, the Taylor Polynomial $P_n$ becomes a power series around $a$ with $a_n = \frac{f^{(n)}(a)}{n!}$.
+$$
+P_{\infty}(x) = \sum \dfrac{f^{(n)}(a)}{n!} \cdot (x - a)^n
+$$
+The Taylor Polynomials $P_n$ were originally framed as polynomial approximations to differentiable functions. It is intuitive that for ``nice'' enough functions, the power series is an $\infty$-degree polynomial approximation to $f$ near $a$, and thus should be accurate.
+
+The question we want to investigate is if the Taylor Series $P_\infty$ converges, and if it converges to $f$.
+
+Observe that $P_n(x)$ is the sequence of partial sums of $P_\infty(x)$, and therefore by definition $P_\infty(x)$ converges iff the sequence $a_n := P_n(x)$ converges.
+
+We first define the $n-$th error term
+\begin{equation}
+E_n(x) := f(x) - P_n(x)
+\end{equation}
+and expand out $P_n(x)$.
+\begin{equation}
+E_n(x) = f(x) - f(a) - f'(a)\cdot (x - a) - \dots - \dfrac{f^{(n)}(a)}{n!}\cdot (x - a)^n
+\end{equation}
+By $(1)$, $P_n(x) \to f(x)$ if and only if $E_n(x) \to 0$. Look at equation $(2)$, and recall Taylor's Theorem. These look eerily familiar.
+\begin{SNP}{\thm}(Taylor-Lagrange) Let $f$ be infinitely differentiable in $(a - h, a + h)$ for some $h > 0$. Then for every $n \in \bb N$ and for every $a\neq x \in (a - h, a + h)$, there is some $\xi$ in $(x, a)$ or $(a, x)$ whichever the case may be such that
+$$
+E_n(x) = \dfrac{f^{(n + 1)}(\xi)}{(n + 1)!}(x - a)^{n + 1}
+$$ 
+\end{SNP}
+\newpage
+This is precisely the statement of Taylor's Theorem. We also have the following which follows from equation $(1)$.
+\begin{SNP}{\thm}Everything as above, $P_n(x) \to f(x)$ if and only if $E_n(x) \to 0$.
+\end{SNP}
+Let's look at some examples.
+\begin{SNP}{\xmp}Let $f(x) = \frac{1}{1 - x}$, verify that $f^{(n)}(x)$ exists on $(-1, 1)$ for every $n$ and is given by
+$$
+f^{(n)}(x) = \dfrac{n!}{(1 - x)^{n + 1}}
+$$
+Therefore the derivatives at $0$ are
+$$
+f^{(n)}(0) = n!
+$$
+and hence the Taylor Series around $0$ is given by
+$$
+\sum \dfrac{f^{(n)}(0)}{n!}\cdot x^n = \sum x^n
+$$
+The error term for the $n-$th partial sum is
+$$
+E_n(x) = \dfrac{f^{(n + 1)}(\xi)}{(n + 1)!}\cdot x^n = \dfrac{1}{(1 - \xi)^{n + 2}}\cdot x^{n + 1}
+$$
+which indeed $\to 0$ whenever $\abs{x} < 1$.
+\end{SNP}
+We can similarly show that the following series converge to their respective functions.
+\begin{align*}
+\sum \dfrac{x^n}{n!} &\to e^x\\
+\sum (-1)^n\dfrac{x^{2n + 1}}{(2n + 1)!} &\to \sin x\\
+\sum (-1)^{n + 1}\dfrac{x^n}{n} &\to \ln (1 + x)
+\end{align*}
+and so on.
+
+Having continuous $n-$th derivatives for all $n$ is not sufficient for convergence. Consider
+$$
+f(x) = \begin{cases}
+e^{-\frac{1}{x^2}} & x > 0\\
+0 & x\leq 0
+\end{cases}
+$$
+Then $f^{(k)}(0) = 0$ for every $k$ and thus the Taylor Series is identically $0$. Clearly it doesn't converge to $f(x)$ for any $x > 0$, since $f(x) \neq 0$ here.
+\end{document}

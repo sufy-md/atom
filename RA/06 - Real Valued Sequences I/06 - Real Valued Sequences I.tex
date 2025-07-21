@@ -1,0 +1,37 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Real Valued Sequences - I}
+\textbf{Prereqs} INT-01 
+
+When we refer to real-valued sequences, we usually mean sequences indexed by $\bb N$. Therefore, specifically for real analysis, the following definition is standard.
+\begin{SNP}{\dfn}{A \emph{sequence} is a function $f : \bb N \rightarrow \bb R$}
+\end{SNP}
+
+A favorite example is the arithmetic sequences $$f(n) = a + (n - 1)d$$ whose terms are usually denoted by $a_n$. Observe that it is not necessary that the function $f$ can be written in a nice clean form. As long as it is defined, $f$ forms a sequence. For example, consider the sequence
+$$
+1, 6, 1, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9 \dots
+$$
+Do you see a pattern? Maybe you do recognise what the sequence is, but I assure you, there is no \emph{pattern} per se. Regardless, the sequence can still be listed via a function $f: \bb N \rightarrow \bb R$ if we just let
+$$
+f(1) = 1, f(2) = 6, f(3) = 1 \dots
+$$
+and so on. Any list of real numbers defines a real-valued sequence.
+
+How about sequence of a sequence? say I have an arithmetic progression
+$$
+1, 4, 7, 10, 13, 16, 19 \dots
+$$
+Let these be $a_1, a_2, a_3 \dots$ respectively. If we then take only the even-indexed terms $a_2, a_4 \dots$ we get the sequence
+$$
+4, 10, 16 \dots
+$$
+which is again an arithmetic progression and therefore a sequence. Here, since the second sequence is taken from the first, we call it a \emph{subsequence}.
+
+\begin{SNP}{\dfn}
+{
+	Let $f: \bb N \rightarrow \bb R$ be a sequence, and $g: \bb N \rightarrow \bb N$ a monotone increasing function. Then, $f \circ g : \bb N \rightarrow \bb R$ is a \emph{subsequence} of $f$
+}
+\end{SNP}
+In the above example, $f(n) = 3n -2$ which describes the sequence, and $g(n) = 2n$ which describes the \emph{sequence of indices of $f$ we want to take}. Indeed, $$f \circ g(n) = f(2n) = 6n - 2$$ which describes the subsequence.
+
+\end{document}

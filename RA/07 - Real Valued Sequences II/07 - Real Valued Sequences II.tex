@@ -1,0 +1,105 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Real Valued Sequences II}
+\textbf{Prereqs} RA-06, INT-02
+
+In INT-02 we establish a definition of convergence of a sequence which I reiterate here.
+
+\begin{SNP}{\dfn}
+{
+	A sequence $a_n$ \emph{converges to} $L$ (written $a_n \rightarrow L$) if given any $\epsilon > 0$, there is some $N \in \bb N$ such that $\abs{L - a_k} < \epsilon$ for $k = N + 1, N + 2, N + 3 \dots$
+}
+
+\end{SNP}
+
+We will now be tasked with some necessary and sufficient conditions on when a sequence converges.
+
+\begin{SNP}{\dfn}{
+	Say a sequence $\{a_n\}_n$ is \emph{bounded} if there is some $M > 0$ such that $\abs{a_n} < M$ for every $n$
+}
+\end{SNP}
+\begin{SWP}{\thm
+}{Every convergent sequence is bounded.
+}
+Let $a_n \rightarrow L$. We want to show there is some fixed $M$ such that $\abs{a_n} < M$ for every $n$. Since $a_n \rightarrow L$, by definition for $\epsilon = 1$, there is some $N$ such that all of $a_{N + 1}, a_{N + 2}, a_{N + 3} \dots$ lie within a distance of $1$ from $L$. Thus, the maximum value of $\abs{a_{N + k}}$ is $\abs L + 1$.
+
+So we have dealt with all the terms $a_{N + k}$, and what remains are the terms $\{a_1, a_2, a_3 \dots a_N\}$. But this is a finite set. Thus if we let
+$$
+M = \max \{ \abs{a_1}, \abs{a_2}, \abs{a_3} \dots \abs{a_N}, \abs L + 1 \}
+$$
+Then indeed, $\abs{a_n} < M$ for every $n$.
+\end{SWP}
+\begin{smrg}
+\begin{center}
+\begin{tikzpicture}[x=4cm]
+  % Draw number line
+  \draw[->] (-1,0) -- (3,0) node[right] {$x$};
+
+  % Mark point at 1
+  \draw (1,0) node[below=4pt] {$L$} -- (1,0.1);
+
+  % Define epsilon
+  \def\eps{0.5}
+
+  % Open interval around 1
+  \draw[blue, thick] (0.5, 0) -- (1.5, 0);
+  \filldraw[fill=white, draw=black, thick] (1 - \eps, 0) circle (2pt);
+  \filldraw[fill=white, draw=black, thick] (1 + \eps, 0) circle (2pt);
+
+  % Optional labels
+  \node[below=4pt] at (0.5, 0) {$L - 1$};
+  \node[below=4pt] at (1.5, 0) {$L + 1$};
+\end{tikzpicture}\\
+All $a_{N + k}$ lie within the blue region and are therefore bounded \\
+$a_1 \dots a_N$ are finitely many terms and are therefore bounded \\
+Hence the entire sequence is bounded
+\end{center}
+\end{smrg}
+In general a bounded sequence does not converge, take for example $a_n = (-1)^n$. However, with one extra condition, we get a sufficient condition for convergence.
+\begin{SNP}{\dfn}{
+	A sequence is \emph{monotone increasing} if $a_n \leq a_{n + 1}$ for every $n$. A sequence is \emph{monotone decreasing} if $a_n \geq a_{n + 1}$ for every $n$. A sequence is called \emph{monotone} if it is either monotone decreasing or monotone increasing.
+}
+\end{SNP}
+\begin{SWP}{\thm}{(Monotone Convergence) A bounded monotone sequence converges.}{
+	WLG we will assume $a_n$ is a monotone increasing sequence, the proof for decreasing sequences is similar. Consider the set $\{a_n \st n \in \bb N\}$. The set is both nonempty and bounded, therefore it has a least upper bound, say $\alpha$.
+
+	Let $\epsilon > 0$ be given. Since $\alpha$ is the least upper bound, $\alpha - \epsilon$ can not be an upper bound and therefore, for some $n$, we have
+	$$
+	\alpha - \epsilon < a_n \leq \alpha
+	$$
+	Now use that $a_n$ is monotone and $\alpha$ is an upper bound to observe that
+	$$
+	\alpha - \epsilon < a_n \leq a_{n + 1} \leq a_{n + 2} \leq a_{n + 3} \leq \dots \leq \alpha
+	$$
+	That is, for every $n' \geq n$ we have $\abs{\alpha - a_{n'}} < \epsilon$ and thus $a_n \rightarrow \alpha$
+}
+\end{SWP}
+\begin{SNP}{\dfn}{
+	A sequence $a_n$ is called a \emph{Cauchy sequence} if for every $\epsilon > 0$, there is some $N \in \bb N$, such thaat whenever $m, n \geq N$ then $\abs{a_m - a_n} < \epsilon$
+}
+\end{SNP}
+In other words, a sequence is Cauchy if the points get arbitrarily close to \emph{each other}, rather than just some fixed $L$ as is in convergence. One fact is immediately clear.
+
+\begin{SWP}{\thm}{
+	Every convergent sequence is Cauchy
+}
+Let $a_n \rightarrow L$, and let $\epsilon > 0$. Then, for some $N$, $n \geq N \implies \abs{a_n - L} < \dfrac{\epsilon}{2}$ by definition of convergence. If $m, n$ are greater than $N$, then
+\begin{align*}
+	\abs{a_m - a_n} &= \abs{a_m - L - (a_n - L)} \\
+					&\leq \abs{a_m - L} + \abs{a_n - L} \\
+					&\leq \dfrac \epsilon 2 + \dfrac \epsilon 2 \\
+					&= \epsilon
+\end{align*}
+Therefore $a_n$ is Cauchy.
+\end{SWP}
+It is a subjective matter whether or not you find the following fact surprising, which (for now) I present without proof.
+\begin{SNP}{\thm}{
+	Every Cauchy sequence converges in $\bb R$
+}
+\end{SNP}
+The proof uses the completeness of $\bb R$ and thus cannot be recreated for $\bb Q$. In fact, we know a Cauchy sequence in $\bb Q$ that does not converge. Consider
+$$
+3, 3.1, 3.14, 3.141, 3.1415, 3.14159, 3.141592, 3.1415926 \dots
+$$
+where $a_n$ is given by truncating $\pi$ to $n - 1$ digits after the decimal. We know the sequence converges in $\bb R$, therefore it is Cauchy in $\bb R$, but all its terms belong to $\bb Q$ so it is also Cauchy in $\bb Q$; however it does not converge in $\bb Q$ since $\pi$ is not in $\bb Q$.
+\end{document}

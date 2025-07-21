@@ -1,0 +1,85 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Continuity of Functions}
+\textbf{Prereqs} RA-10, FD-02
+
+In RA-10 we quantified continuity of functions via sequences, the idea being that as $x_n$ get closer to some $x_0$, $f(x_n)$ should get closer to $f(x_0)$ for $f$ to be continuous.
+
+Here, to define continuity, we impose what appears to be a stronger condition. We start with the value $f(x_0)$ and require that given any $\epsilon > 0$, there \emph{must exist} some $\delta > 0$ such that whenever $x$ is within $\delta$ of $x_0$, $f(x)$ is within $\epsilon$ of $f(x_0)$.
+
+In other words, in the sequential definition, we started on the $x-$axis (``as $x_n$ get closer to $x_0\dots$'') and made conclusions about the $y-$axis (``...$f(x_n)$ get closer to $f(x_0)$'').
+
+However, in this ``$\epsilon-\delta$'' definition, we \emph{start} on the $y-$axis (``given an $\epsilon-$neighborhood around $f(x_0)\dots$'') and impose a condition on the $x-$axis (``$\dots$whenever $x$ is within $\delta$ of $x_0$, $f(x)$ lands within that neighborhood'').
+
+On first glance, the second definition looks stronger. $f(x)$ has no choice BUT to land within $\epsilon$ of $f(x_0)$ on the entire interval $(x_0 - \delta, x_0 + \delta)$. The first definition asks $f(x_n)$ to get $\epsilon-$close to $f(x_0)$ only after a certain $N$. Let's formalise and see if this is true.
+
+\begin{SNP}{\dfn}{$f:\Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$ is \emph{continuous at} $x_0$ if for every $\epsilon > 0$, there is some $\delta > 0$ such that $x \in (x_0 - \delta, x_0 + \delta) \implies f(x) \in (f(x_0) - \epsilon, f(x_0) + \epsilon)$}
+\end{SNP}
+
+That is, you can get $f(x)$ as close to $f(x_0)$ as you want if $x$ is sufficiently close to $x_0$.
+
+We haven't yet justified the fact that both these definitions are for $f$ to be continuous at a fixed point. We must show they are equivalent.
+
+\begin{SWP}{\thm}{A function $f$ is continuous at $x_0$ if and only if it is sequentially continuous at $x_0$}$(\rightarrow)$ We want to show continuous implies sequentially continuous. i.e, we're given for every $\epsilon$ some $\delta$ has the property that$$\abs{x - x_0} < \delta \implies \abs{f(x) - f(x_0)} < \epsilon$$and we want to show whenever $x_n \rightarrow x_0$ then $f(x_n) \rightarrow f(x_0)$.
+
+Let $\epsilon_0 > 0$ be given and choose $\delta_0$ by definition of continuity of $f$ at $x_0$. Suppose $x_n \rightarrow x_0$. By definition of convergence, there is some $N$ such that
+$$
+n \geq N \implies \abs{x_n - x_0} < \delta_0
+$$
+But $\delta_0$ was chosen such that
+$$
+\abs{x_n - x_0} < \delta_0 \implies \abs{f(x_n) - f(x_0)} < \epsilon_0
+$$
+Therefore whenever $n \geq N$, $\abs{f(x_n) - f(x_0)} < \epsilon_0$. By definition of convergence, $f(x_n) \rightarrow f(x_0)$\qed
+\newpage
+$(\leftarrow)$ Now we want to show sequentially continuous implies continuous. This is not straightforward, and instead we'll show the contrapositive -- that if $f$ is not continuous then it is not sequentially continuous. 
+
+Suppose $f$ is not continuous. Recall that $f$ is continuous only when for every $\epsilon$, there is some $\delta$ with a certain property. For $f$ to not be continuous, there must be some $\epsilon_0$ such that every $\delta$ fails to have that property. In all, we're given that there is some $\epsilon_0$, such that for every $\delta$, there is some $x_\delta$ such that
+$$
+x_\delta \in (x_0 - \delta, x_0 + \delta)
+$$
+but
+$$
+f(x_\delta) \notin (f(x_0) - \epsilon_0, f(x_0) + \epsilon_0)
+$$
+And we want to show $f$ is not sequentially continuous -- that there is some sequence $x_n \rightarrow x_0$ but $f(x_n) \not\rightarrow f(x_0)$
+
+Now this is straightforward. Knowing $\epsilon_0$ and that the property fails for every $\delta$, take $\delta_n = \frac{1}{n}$. Then, there is some $x_n := x_{\delta_n}$ such that
+$$
+x_n \in (x_0 - \dfrac 1 n, x_0 + \dfrac 1 n)
+$$
+but
+$$
+\abs{f(x_n) - f(x_0)} \geq \epsilon_0
+$$
+This $x_n$ is our required sequence. Clearly, $x_n \rightarrow x_0$ (since every subsequent term lies in smaller and smaller intervals around $x_0$) but $f(x_n) \not\rightarrow f(x_0)$ (since $f(x_n)$ fail to get closer to $f(x_0)$ than $\epsilon_0$).
+
+Thus $f$ is not sequentially continuous.
+\end{SWP}
+Continuity and sequential continuity are the same thing! Finally, we make the following definition
+
+\begin{SNP}{\dfn}{A function $f:\Omega \rightarrow \bb R$ is \emph{continuous} if it is \emph{continuous at} every point of $\Omega$}
+\end{SNP}
+
+Where we generalise from continuity at a point to continuity on a set.
+
+\begin{SNP}{\ex}{Show that $f(x) = x$ is continuous.}
+\end{SNP}
+
+Recall from FD-02 the various definitions of limits. Comparing to the definition of continuity at a point, we can clearly see that the following definition of continuity is equivalent to both our above definitions.
+\begin{SNP}{\dfn}{A function $f:\Omega \rightarrow \bb R$ with $x_0 \in \Omega \subseteq \bb R$ is \emph{continuous at} $x_0$ if
+$$
+\lim_{x\rightarrow x_0} f(x) = L
+$$}
+\end{SNP}
+\AnswerSection
+\ans Let $x_n$ be a sequence converging to an arbitrary $x_0$, i.e $x_n \rightarrow x_0$. But $f(x_n) = x_n$ and $f(x_0) = x_0$, so $f(x_n) \rightarrow f(x_0)$.\qed
+
+\textbf{Aliter.} Let $\epsilon > 0$ be given. Take $\delta = \epsilon$ and suppose $\abs{x - x_0} < \delta$. Then,
+\begin{align*}
+\abs{f(x) - f(x_0)} &= \abs{x - x_0}\\
+					&< \delta \\
+					&= \epsilon
+\end{align*}
+Thus $f$ is continuous.\qed
+\end{document}

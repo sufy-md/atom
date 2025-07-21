@@ -1,0 +1,77 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Convergence is Simple}
+Consider the following limit
+$$
+L := \lim_{n \rightarrow \infty} 1 - \dfrac{1}{n}
+$$
+Indeed, $L = 1$. Here, we say that \emph{the sequence} $1 - \frac{1}{n}$ \emph{converges to} $1$. Intuitively, we know what convergence of a sequence should mean, but how do we define it?
+
+We want to quantify a simple idea. If we say $a_n \rightarrow L$ as $n \rightarrow \infty$ it should be if and only if $a_n$ gets closer and closer to $L$ as $n \rightarrow \infty$.
+
+That in and of itself isn't enough. For starters, the sequence $1 - \frac 1 n$ also gets closer and closer to, say, $1.5$ as $n \rightarrow \infty$. If you further try some shenanigans along the lines of ``as $n \rightarrow \infty$, $a_n$ should \emph{go towards} $L$'', that doesn't work either, because the sequence $\frac{(-1)^n}{n}$ doesn't go anywhere, it alternates and eventually diminishes.
+
+Let's sit down for a conversation, shall we? You claim that the sequence $1 - \frac 1 n$ converges to $1$. I ask you what that means. You say ``well, the sequence gets closer and closer to $1$ as $n \rightarrow \infty$''. I ask you how close to $1$ does the sequence get, really?
+
+Now you do some thinking. How close? Eventually, you answer - ``as close as you want''. I'm slightly taken aback, but I decide to test your claim. Does the sequence ever land within $0.5$ of $1$? Sure, just take $n > 2$. Within $0.33$? Sure, take $n > 3$. Within $0.25$? Sure, take $n > 4$, and so on.
+
+Eventually I get frustrated and give you some arbitrary number $\epsilon$ and ask you - does your sequence get closer than $\epsilon$ to $1$?
+
+\begin{smrg}
+\begin{center}
+\begin{tikzpicture}[x=4cm]
+  % Draw number line
+  \draw[->] (-1,0) -- (3,0) node[right] {$x$};
+
+  % Mark point at 1
+  \draw (1,0) node[below=4pt] {$1$} -- (1,0.1);
+
+  % Define epsilon
+  \def\eps{0.5}
+
+  % Open interval around 1
+  \draw[blue, thick] (1 - \eps, 0) -- (1 + \eps, 0);
+  \filldraw[fill=white, draw=black, thick] (1 - \eps, 0) circle (2pt);
+  \filldraw[fill=white, draw=black, thick] (1 + \eps, 0) circle (2pt);
+
+  % Optional labels
+  \node[below=4pt] at (1 - \eps, 0) {$1 - \epsilon$};
+  \node[below=4pt] at (1 + \eps, 0) {$1 + \epsilon$};
+\end{tikzpicture}
+Does the sequence fall within $\epsilon$ of $1$?
+\end{center}
+\end{smrg}
+
+Now you do some thinking. You want $1 - a_n < \epsilon$, or $\frac 1 n < \epsilon$. Can you guarantee this for a large enough $n$? Yes! We use the Archimedean Property of $\bb R$ to guarantee that there is some natural number $N$ such that
+$$
+N > \dfrac 1 \epsilon
+$$
+and therefore for every $n \geq N$, we have
+$$
+\epsilon > \dfrac 1 n
+$$
+Thus whenever $n > \frac{1}{\epsilon}$, the term $a_n$ falls within $\epsilon$ distance of $1$.
+
+A subtle but important feature of this formulation is this -- let $\epsilon$ be some fixed number. Then, there is some fixed $N$ such that ALL of $a_N, a_{N + 1}, a_{N + 2} \dots$ fall within $\epsilon$ of $1$
+
+It is necessary for us to impose this condition that all values beyond a fixed $N$ fall within the stipulated distance of the limit. This and only this captures in the truest sense what it means for a sequence to get closer and closer to a number.
+
+For a nonexample, consider the sequence
+$$
+-1, 1, -1, 1 \dots
+$$
+where the general term is given by $(-1)^n$. Here, \emph{infinitely} many terms of the sequence are arbitrarily close to $1$ (all terms of the form $a_{2n}$ are equal to $1$ and hence their distance from $n$ is $0$, which is smaller than $\epsilon$ for every positive $\epsilon$). However, would you say that $a_n \rightarrow 1$? Probably not. Does our intuition capture this?
+
+Remember, we want that given some $\epsilon > 0$, there should be some $N$ such that $a_{N + 1}, a_{N + 2}, a_{N + 3} \dots$ all fall within $\epsilon$ of the limit. If $1$ was the limit and we take $\epsilon = 0.5$, then the distance between $1$ and either $a_{N + 1}$ or $a_{N + 2}$ wil be $2$ (one of them is guaranteed to be $-1$). Since $\epsilon = 0.5$, the sequence fails to fall within $\epsilon$ of $1$, therefore it doesn't converge to $1$.
+
+We are ready to formalise the definition
+\begin{SNP}{\dfn}
+{
+	Say a sequence $a_n$ \emph{converges to} $L \in \bb R$ if and only if the following holds:
+
+	Given some $\epsilon > 0$, there is some $N$ such that ignoring the first $N$ terms of the sequence, all other terms lie within $\epsilon$ distance of $L$.
+
+	i.e., for every $\epsilon > 0$, there is some $N \in \bb N$, such that $\abs{L - a_n} < \epsilon$ for every $n = N + 1, N + 2, N + 3 \dots$
+}
+\end{SNP}
+\end{document}

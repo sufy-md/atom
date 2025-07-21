@@ -1,0 +1,6 @@
+.obsidian
+.vscode
+*.md
+cleanup.py
+watch.py
+make_index.py

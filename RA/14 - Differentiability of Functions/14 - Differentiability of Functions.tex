@@ -1,0 +1,156 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Differentiability of Functions}
+\textbf{Prereqs} FD-02, RA-11
+
+So far, we've dealt with whether you can draw a function without lifting your pen. Now we ask -- can you draw it without snapping your wrist?
+
+The idea of \emph{differentiability} deals with this question, and is the central idea in understanding velocity, curvature, and continuous optimization. (Differentiability has a \emph{much} different meaning in a several variable context, but is more or less a generalization. Weird how that works, right?).
+
+Consider the graph of $f(x) = \abs{x}$
+\begin{center}
+\begin{tikzpicture}[x=2cm, y=2cm]
+  % Axes
+  \draw[->] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+  \draw[->] (0, -0.5) -- (0, 2.5) node[above] {$y$};
+
+  % Plot y = |x|
+  \draw[thick, blue, domain=-2:0] plot (\x, {-\x});
+  \draw[thick, blue, domain=0:2]  plot (\x, {\x});
+
+  % Label origin
+  \node[below left] at (0,0) {$0$};
+\end{tikzpicture}\\
+The pen does not lift at $(0, 0)$, but your wrist will snap.
+\end{center}
+You absolutely can draw this without lifting your pen off the paper, but you'd have to sharply change directions at the origin. Compare that to the curve of $f(x) = x^2$
+\begin{center}
+\begin{tikzpicture}[x=2cm, y=2cm]
+  % Axes
+  \draw[->] (-1.5, 0) -- (1.5, 0) node[right] {$x$};
+  \draw[->] (0, -0.5) -- (0, 2.75) node[above] {$y$};
+
+  % Graph of y = x^2
+  \draw[domain=-1.5:1.5, smooth, variable=\x, thick, blue] plot ({\x}, {\x*\x});
+
+  % Notable points
+  \filldraw (0,0) circle (1pt) node[below left] {$(0,0)$};
+\end{tikzpicture}\\
+The pen glides smoothly from its downward movement to upward, like butter.
+\end{center}
+\newpage
+Differentiability, like continuity, is defined at a point. For example, your pen \emph{will} move smoothly when drawing $f(x) = \abs x$ at all points other than the origin. So it becomes unfair to say that $f$ is not differentiable, when only one point serves as counterexample.
+
+So how do we quantify this lack of ``jerkiness''? We want to capture that at a given point $(x_0, f(x_0))$, the movement of the pen is \emph{smooth}. The way we do this is simple. If the direction in which your pen approaches a point $(x_0 , f(x_0))$ is the same as the direction in which it exits, then we consider the movement to be smooth.
+
+Contrast this against $\abs{x}$ at $(0, 0)$. We enter in the direction $(1, -1)$ and exit in the direction $(1, 1)$. This idea is thus intuitively strong enough to form the definition.
+
+\begin{center}
+\begin{tikzpicture}[x=2cm, y=2cm]
+  % Axes
+  \draw[->] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+  \draw[->] (0, -0.5) -- (0, 2.5) node[above] {$y$};
+
+  % Plot y = |x|
+  \draw[thick, blue, domain=-2:0] plot (\x, {-\x});
+  \draw[thick, blue, domain=0:2]  plot (\x, {\x});
+
+  % Label origin
+  \node[below left] at (0,0) {$0$};
+
+  % Direction arrows with vector labels
+  \draw[->, red, thick] (-1.2,1.2) -- (-0.4,0.4);
+  \node[left] at (-1.2,1.2) {\footnotesize $(1,\,-1)$};
+
+  \draw[->, red, thick] (0.4,0.4) -- (1.2,1.2);
+  \node[right] at (1.2,1.2) {\footnotesize $(1,\,1)$};
+
+  \draw[->, red, thick] (-1.2,1.2) -- (-0.4,0.4) node[pos=1, left] {\footnotesize slope $-1$};
+  \draw[->, red, thick] (0.4,0.4) -- (1.2,1.2) node[pos=0, right] {\footnotesize slope $+1$};
+\end{tikzpicture}\\
+We enter in the direction of the vector $(1, -1)$ and exit in $(1, 1)$
+\end{center}
+
+\begin{SNP}{\dfn}{A function $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$ is \emph{differentiable at} $x_0$ if the limits
+$$
+\lim_{h\rightarrow0^+} \frac{f(x_0 + h) - f(x_0)}{h}
+$$
+and
+$$
+\lim_{h\rightarrow0^+} \frac{f(x_0) - f(x_0 - h)}{h}
+$$
+exist and are equal.}
+\end{SNP}
+Where to quantify direction of exiting (resp. entering) the point, we use the slope of the line between our concerned point and a point slightly ahead (resp. behind) it.
+
+Note that the second limit in the definition is precisely equal to the following limit.
+$$
+\lim_{h\rightarrow0^-}\frac{f(x_0 + h) - f(x_0)}{h}
+$$
+
+This equality helps us frame a second definition.
+\begin{SNP}{\dfn}{A function $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$ is \emph{differentiable at} $x_0$ if the limit
+$$
+\lim_{h\rightarrow0} \frac{f(x_0 + h) - f(x_0)}{h}
+$$exists.}
+\end{SNP}
+
+Of course, we need to justify the restatement.
+
+\begin{smrg}
+\textbf{Proof.} (Defn. 1 $\implies$ Defn. 2) Suppose for some $f$ both limits in Defn. 1 exist and are equal at some $x_0$. Consider the limit in Defn. 2. Take any sequence $h_n \rightarrow 0$ with $h_n \neq 0$ for every $n$ and divide it into subsequences $h_{n_k}$ and $h_{n_{k'}}$ with $h_{n_k} > 0$ and $h_{n_{k'}} < 0$. Then by Defn. 1, the sequences 
+$$
+\frac{f(x_0 + h_{n_k}) - f(x_0)}{h_{n_k}}
+$$
+and
+$$
+\frac{f(x_0 + h_{n_{k'}}) - f(x_0)}{h_{n_{k'}}}
+$$
+converge and are equal to $L$ (say). Apply the definition of convergence to both these sequences for some $\epsilon$ to obtain $N_1, N_2$.
+
+Now consider the sequence
+$$
+\frac{f(x_0 + h_n) - f(x_0)}{h_n}
+$$
+Whenever $n \geq \max\{N_1, N_2\}$, by convergence of above two sequences (since $h_n$ is either $>0$ or $<0$, it falls into precisely one of $h_{n_k}$ and $h_{n_{k'}}$) we get that
+$$
+\abs{\frac{f(x_0 + h_n) - f(x_0)}{h_n} - L} < \epsilon
+$$
+Therefore we obtain
+$$
+\lim_{h\rightarrow 0}\frac{f(x_0 + h) - f(x)}{h} = L
+$$
+as required.\qed
+
+(Defn. 2 $\implies$ Defn. 1) We know for any sequence $h_n \rightarrow 0$, the limit
+$$
+\lim_{h_n\rightarrow 0}\frac{f(x_0 + h_n) - f(x_0)}{h_n} = L
+$$
+Since $h_n \rightarrow 0^+$ and $h_n \rightarrow 0^-$ both imply $h_n \rightarrow 0$, their respective limits of the difference quotient also converge to $L$.\qed
+\end{smrg}
+Whenever a function $f$ is differentiable at $x_0$, the limit $L$ of the difference quotient is usually denoted by $f'(x_0)$.
+
+If $f'$ is defined for all $x_0 \in \Omega$, we say $f$ is \emph{differentiable on} $\Omega$ and that $f'$ is the \emph{derivative of} $f$.
+
+Suppose now there is some curve which we can draw smoothly on a set $\Omega$. Does it intuitively make sense that we can draw it without lifting our pen? Of course! Semi-formally, take the contrapositive. If I have to lift my pen to draw it at some point $x_0$, how can I smoothly draw it at $x_0$? I can't!
+
+\begin{SWP}{\thm}{If $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$ is differentiable at some $x_0 \in \Omega$, then $f$ is continuous at $x_0$.}Suppose $f$ is differentiable at $x_0$. Take any sequence $x_n \rightarrow x_0$ with $x_n \neq x_0$ for every $n$. Then the limit
+$$
+\lim_{n\rightarrow \infty}\frac{f(x_n) - f(x_0)}{x_n - x_0}
+$$
+exists by definition of differentiability, and is denoted by $f'(x_0)$. Further, we know that $x_n - x_0 \rightarrow 0$. Now observe that
+\begin{align}
+\lim_{n \rightarrow \infty} f(x_n) - f(x_0) &= \lim_{n \rightarrow \infty} (x_n - x_0)\cdot\frac{f(x_n) - f(x_0)}{x_n - x_0}\\
+                                            &= \lim_{n \rightarrow \infty} (x_n - x_0)\cdot\lim_{n \rightarrow \infty}\frac{f(x_n) - f(x_0)}{x_n - x_0}\\
+                                            &= 0\cdot f'(x_0)\\
+                                            &= 0
+\end{align}
+Where $(1)$ is valid because $x_n - x_0$ is never $0$ by choice of $x_n$, and we split the limit in $(1)$ into two limits in $(2)$ because both limits exist.
+
+Therefore $f(x_n) \rightarrow f(x_0)$ and $f$ is continuous.
+\end{SWP}
+
+So functions differentiable on some interval $(a, b)$ are also continuous on $(a, b)$. Hence, functions differentiable on $(a, b)$ and continuous on $[a, b]$ have some interesting properties -- including the Mean Value Theorems and characterizations of local extrema which we will now look at.
+
+Observe the hesitation in calling a function differentiable on $[a, b]$. We cannot have a function $f$ defined on $[a, b]$ differentiable on $a$, because the second limit in the original definition (or the ``entry slope'') will not be defined. Similarly, we cannot have $f$ differentiable on $b$, because the first limit (or the ``exit slope'') will not be defined.
+\end{document}

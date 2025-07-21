@@ -1,0 +1,104 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Extreme Value Theorem}
+\textbf{Prereqs} RA-08, RA-11
+
+Let $f:[a, b] \rightarrow \bb R$ be continuous in the pen and paper sense. So, there are two points $(a, f(a))$ and $(b, f(b))$ between which you draw a curve with a pen without lifting it. Is it necessary for the curve to be bounded?
+
+\begin{center}
+\begin{tikzpicture}[x=1.5cm, y=2cm]
+
+  % Axes
+  \draw[->] (-0.4,0) -- (7,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,3) node[above] {$y$};
+
+  % Define natural log values (approximated)
+  \def\lnTwo{0.693}
+  \def\lnSix{1.792}
+
+  % Plot ln(x) from x = 2 to x = 6
+  \draw[domain=2:6, smooth, variable=\x, blue, thick] 
+    plot ({\x}, {ln(\x)});
+
+  % Dashed horizontal lines
+  \draw[dashed] (0, \lnTwo) -- (6.5, \lnTwo);
+  \draw[dashed] (0, \lnSix) -- (6.5, \lnSix);
+
+  % Vertical dotted lines to x-axis
+  \draw[dotted] (2,0) -- (2, {ln(2)});
+  \draw[dotted] (6,0) -- (6, {ln(6)});
+
+  % Dots on the curve
+  \filldraw[black] (2, {ln(2)}) circle (1.5pt);
+  \filldraw[black] (6, {ln(6)}) circle (1.5pt);
+
+  % Labels
+  \node[below] at (2, 0) {$a$};
+  \node[below] at (6, 0) {$b$};
+  \node[left] at (0, \lnTwo) {$f(a)$};
+  \node[left] at (0, \lnSix) {$f(b)$};
+  % \node[above right] at (4.5, {ln(4.5)}) {$y = \ln x$};
+
+\end{tikzpicture}\\
+A continuous curve between two points stays bounded
+\end{center}
+
+Intuitively, this makes sense. If we go too far up with the pen, we will need to come back down to match $y = f(b)$ and the function cannot grow unbounded. Let's quantify this formally.
+
+\begin{SWP}{\thm}{(Boundedness) Let $f: [a, b] \rightarrow \bb R$ be continuous. The set $$S := \{f(x) \st x \in [a, b]\}$$is bounded.}Suppose for contradiction that $S$ is not bounded. Then, for every $n$, there is some $y_n \in S$ such that $\abs{y_n} > n$. But every $y$ in $S$ is of the form $f(x)$, thus we get a sequence $\{x_n\}$ with elements in $[a, b]$ such that
+$$
+\abs{f(x_n)} > n
+$$
+Note that $\{x_n\}$ is a bounded sequence and therefore has a convergent subsequence, say $x_{n_k} \rightarrow x_0$. But $f$ is continuous, so $f(x_{n_k}) \rightarrow f(x_0)$. Since every convergent sequence is bounded, we get that $\{f(x_{n_k})\}$ is bounded. But $\abs{f(x_{n_k})} > n_k \geq k$ for every $k$ by the assumption that $S$ is unbounded.
+
+Contradiction. Our assumption that $S$ is unbounded fails.
+\end{SWP}
+
+\begin{SNP}{\ex}Show with an example that if $[a, b]$ is replaced with $(a, b)$, the theorem doesn't hold. Why can we not just mimic the proof?
+\end{SNP}
+
+Certainly $f(a) \in S$. So we can even say $S$ has a least upper bound. We've seen this pattern emerge a few times -- least upper bounds can be approached with sequences, and continuous functions preserve convergence. With this intuition, we state the following result.
+
+\begin{SNP}{\thm}{(Extreme Value) Let $f: [a, b] \rightarrow \bb R$ be continuous. Then, there is an $x_0 \in [a, b]$ such that $f(x_0) \geq f(x)$ for each $x \in [a, b]$}
+\end{SNP}
+Or in other words, $f$ attains a maximum on $[a, b]$. Note that this is stronger than just being bounded. For example, $f(x) = x$ is bounded by $5$ on $(3, 5)$, in fact it is the least upper bound, but $f$ does not obtain a maximum value on $(3, 5)$.
+
+\begin{smrg}
+\textbf{Proof.} Let $\alpha$ be the least upper bound of $S$, then there is a sequence $y_n \rightarrow \alpha$ with $y_n \in S$. But each $y$ is $f(x)$ for some $x$, and hence we get a sequence $\{x_n\}$ such that
+$$
+f(x_n) \rightarrow \alpha
+$$
+We need to show that $\alpha = f(x_0)$ for some $x_0$. A sufficient condition for this is $x_n \rightarrow x_0$ because then we can directly use continuity in the above equation. But we don't know if $\{x_n\}$ converges or not.
+
+However, $\{x_n\}$ is bounded, and thus has a convergent subsequence $\{x_{n_k}\}$ converging to some $x_0$. By continuity, we get $f(x_{n_k}) \rightarrow f(x_0)$.
+
+But $f(x_{n_k})$ is a subsequence of $f(x_n)$. Since subsequences converge to the same limit as the original sequence, we get $f(x_{n_k}) \rightarrow \alpha$.
+
+By uniqueness of limit of a sequence, $f(x_0) = \alpha$.
+\end{smrg}
+\begin{SNP}{\rmk}{The same proof can be recreated to show $f$ attains a minimum.}
+\end{SNP}
+Once again I've used some results that a standard course should cover, but if not, here they are as exercises.
+\begin{SNP}{\ex}Let $x_n \rightarrow L$ and $x_{n_k}$ be any subsequence. Then show that $x_{n_k} \rightarrow L$.
+\end{SNP}
+\begin{SNP}{\ex}Show that limit of a convergent sequence is unique.
+\end{SNP}
+
+There's a subtlety in the proof that's easy to miss. Take a sequence that lies entirely inside $[a, b]$. This is bounded, and thus by Bolzano-Weierstrass, has a convergent subsequence.
+
+What's easy to miss is that the limit of the subsequence also lies inside $[a, b]$. We omitted this detail in the statement and proof provided in RA-08, but is \emph{critical} in the proof of Extreme Value Theorem. For example, $a_n = \frac 1 n$ is a bounded sequence lying entirely inside $(0, 1)$ but does \textbf{NOT} have a limit point in $(0, 1)$. Indeed, this has to do with the fact that $[0, 1]$ is compact while $(0, 1)$ is not (anyone not familiar with Topology can ignore this remark).
+
+In any case, the proof of Bolzano-Weierstrass from Nested Intervals brings out this detail, and can be found in RA-XX.
+
+\AnswerSection
+\ans We first form a sequence $x_n$ such that $\abs{f(x_n)} > n$, claim that it has a convergent subsequence $x_{n_k} \rightarrow x_0$ and then use continuity to say $f(x_{n_k}) \rightarrow f(x_0)$. Here's the problem -- the limit point $x_0$ could be one of the endpoints $a$ or $b$, and if the domain of $f$ is $(a, b)$ then it could be that $f(x_0)$ is not defined.
+
+Intuitively, open intervals give you leeway to make your function unbounded at the endpoints because you don't have to bring them back down. Just look at the curve of $y = \tan x$ on $(0, \frac \pi 2)$.
+
+\ans Use the fact that $n_k \geq k$ and apply definition of convergence to $x_n$.
+
+\ans Suppose not and a sequence $\{a_n\}$ converges to two limits $L$ and $M$ with $L < M$. Take $\epsilon = \frac{M - L}{2}$. Then an infinite tail of the sequence is smaller than $\frac{L + M}{2}$ while another is larger. Impossible.
+
+\textbf{Aliter.} $$0 \leq \abs{L - M} = \abs{L - a_n - (M - a_n)} \leq \abs{L - a_n} + \abs{M - a_n} < \epsilon$$
+Therefore $\abs{L - M} = 0$.
+\end{document}

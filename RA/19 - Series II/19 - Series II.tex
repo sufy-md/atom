@@ -1,0 +1,169 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Series II}
+\textbf{Prereqs} RA-07, RA-18
+
+We are now ready to explore the various sufiicient conditions for a series to converge.
+
+Recall from RA-07 that every bounded monotone sequence converges. Let $\{a_n\}_n$ be a sequence such that $a_n > 0$ for every $n$. Then, $S_n$ is a monotone increasing sequence. This insight leads us to the following result, which is a building block for further results.
+
+\begin{SWP}{\thm}{Let $a_n > 0$ for every $n$. Then $\sum a_n$ converges if and only if the sequence $S_n$ is bounded.}Since $a_n > 0$, $S_n$ is monotone increasing. Thus if it is bounded it converges. On the other hand, every convergent sequence is bounded, so if $S_n$ converges it is bounded.
+\end{SWP}
+
+This seemingly obvious (and even unnecessary) result directly helps us prove the following test.
+
+\begin{SWP}{\thm}{(Comparison Test) Let $0 \leq a_n \leq b_n$ for every $n \geq k$ for some $k$. If $\sum b_n$ converges, then $\sum a_n$ converges. If $\sum a_n$ diverges, then $\sum b_n$ diverges.}If $\sum b_n$ converges then the sequence of its partial sums (say $T_n$) is bounded. Since $0 \leq a_n \leq b_n$, we get $0 \leq S_n \leq T_n$ and thus $S_n$ is bounded. Thus $\sum a_n$ converges.
+
+Now suppose $\sum a_n$ diverges, i.e. for every $M > 0$, $S_n$ is eventually greater than $M$. Since $0 \leq S_n \leq T_n$, $T_n$ is also unbounded. Thus $\sum b_n$ diverges.
+\end{SWP}
+
+If a (positive) series is bounded between $0$ and a (positive) convergent series, it must converge. If a (positive) series is bounded below by a (positive) divergent series, it must diverge. These are statements which are not only intuitively true, but are supported by our definitions of series and convergence.
+
+The existence of comparison test directly gives rise to the following.
+\begin{SNP}{\thm}{(Limit Comparison Test) Let $a_n, b_n \geq 0$ for every $n \geq k$ for some $k$. Suppose $\dfrac {a_n}{b_n} \to L$. Then
+\begin{enumerate}
+	\item If $L \neq 0$ and $L \neq \infty$, then $a_n$ and $b_n$ converge and diverge together.
+	\item If $L = 0$ and $b_n$ converges, then $a_n$ converges.
+	\item If $L = \infty$ and $b_n$ diverges, then $a_n$ diverges.
+\end{enumerate}}For every $\epsilon$ and every $n \geq N$ for some $N$, $a_n$ lies within $(b_n(L - \epsilon), b_n(L + \epsilon))$.
+\end{SNP}
+The idea is simple. If $\frac{a_n}{b_n} \to L$ and $L$ is neither $0$ nor $\infty$, then they are ``comparable'' and should behave the same. If $L = 0$, then $a_n$ is ``much smaller'' than $b_n$, so $b_n$ converging naturally implies $a_n$ converging. Finally if $L = \infty$, then $a_n$ is ``much larger'' than $b_n$, and so $b_n$ diverging natually implies $a_n$ diverging.
+\begin{smrg}\textbf{Proof.} Since $a_n, b_n$ are both $\geq 0$ by assumption, then $\sum a_n$ and $\sum b_n$ converge if and only if they are bounded. In other words, if they don't converge, they necessarily go to $\infty$.
+
+Suppose $\sum b_n$ converges to some $B$ and take $\epsilon = \min\left\{B, \dfrac 1 B\right\}$. Then there is some $M$ such that $\sum\limits_{m = 1}^{n}b_m$ lies within $\epsilon$ of $B$.
+
+Consider the $k-$th partial sum of $\sum a_n$ with $k > \max\{M, N\}$. Then,
+$$
+0 \leq \sum\limits_{m = 1}^{k}a_m \leq \sum\limits_{m = 1}^{k}b_m(L + \epsilon) \leq B(L + \epsilon) < BL + 1
+$$
+Where the first inequality is by hypothesis, the second is from $\dfrac{a_n}{b_n} \to L$, the third is from the fact that a partial sum of positive terms is smaller than the complete sum, and the fourth from the fact that $\epsilon \leq \dfrac 1 B$.
+
+All in all, we obtain that all partial sums of $\sum a_n$ are bounded. Combined with $a_n \geq 0$ we get that $\sum a_n$ converges.
+
+Now suppose $\sum b_n$ diverges. Then for every $M > 0$, there is some $N > 0$ such that the $k-$th partial sum of $\sum b_n$ for every $k > N$ is larger than $M$.
+
+Take $M' > 0$, we want to show a similar statement for $\sum a_n$ holds. This is simple, choose $\epsilon$ as before, and use $a_n$ lies within $(b_n(L - \epsilon), b_n(L + \epsilon))$ for every $n \geq N'$ for some $N'$.
+
+Since $b_n$ is unbounded, so is $b_n(L - \epsilon)$, and thus so is $a_n$. Therefore $\sum a_n$ diverges.\qed
+\end{smrg}
+The proofs for the remaining two cases follow similarly. There are 2 ``missing'' cases, $L = 0$ and $\sum b_n$ diverges, and $L = \infty$ and $\sum b_n$ converges.
+
+In the case $L = 0$ and $\sum b_n$ diverging, following the second part of the proof, we will obtain $\sum a_n$ is bounded below by $0$, which does not help us conclude anything.
+
+Similarly, in the case $L = \infty$ and $\sum b_n$ converging, following the first part of the proof, we will get $\sum a_n$ is bounded above by $\infty$ which doesn't help us conclude anything.
+
+It is now about time we revisit an old friend.
+\begin{SNP}{\thm}{(Cauchy Condensation Test) Let $a_n$ be monotone decreasing and $a_n \geq 0$ for every $n$. Then, $\sum a_n$ converges iff $\sum 2^k\cdot a_{2^k}$ converges.}
+\end{SNP}
+This theorem says that if $a_n$ is monotone decreasing, then
+$$
+a_1 + a_2 + a_3 + \ldots
+$$
+converges if and only if
+$$
+a_1 + 2a_2 + 4a_4 + \ldots
+$$
+converges. The idea behind the proof is more or less similar to how we showed $\sum \dfrac 1 n$ diverges in RA-18.
+\begin{smrg}\textbf{Proof.} Let $S_n$ denote $a_1 + a_2 + \dots + a_n$ and $T_k$ denote $a_1 + 2a_2 + \dots + 2^ka_{2^k}$. Suppose $T_k$ converges. For any $n$, take $k$ such that $2^k \geq n$, then
+\begin{align*}
+S_n &= a_1 + a_2 + \dots + a_n\\
+    &\leq a_1 + a_2 + \dots a_{2^k} + \dots + a_{2^{k + 1} - 1}\\
+    &= a_1 + (a_2 + a_3) + (a_4 + \dots a_7) + \dots + (a_{2^k} + \dots + a_{2^{k + 1} - 1})\\
+    &\leq a_1 + 2a_2 + \dots + 2^ka_{2^k}\\
+    &= T_k
+\end{align*}
+Therefore $S_n$ is bounded hence converges. Similarly suppose $S_n$ converges, and for some $k$ choose $n$ such that $n \geq 2^k$. Then,
+\begin{align*}
+S_n &= a_1 + a_2 + \dots + a_n\\
+    &\geq a_1 + a_2 + (a_3 + a_4) + (a_5 + \dots + a_8) + \dots + (a_{2^{k - 1} + 1} + \dots a_{2^k})\\
+    &\geq \dfrac1 2 a_1 + a_2 + 2a_4 + 4a_8 + \dots + 2^{k-1}a_{2^k}\\
+    &= \dfrac 1 2 T_k
+\end{align*}
+Therefore $T_k$ is bounded hence converges.\qed
+\end{smrg}
+The Condensation Test is useful in classifying the following class of series.
+\begin{SNP}{\xmp}$\sum \frac{1}{n^p}$ converges iff $\sum \frac{2^k}{2^{kp}} = \sum \frac{1}{2^{k(p - 1)}}$ converges. This is a geometric series with common ratio $2^{1 - p}$, thus it converges iff $2^{1 - p} < 1$, or equivalently iff $p > 1$.
+\end{SNP}
+This isn't the only example where a bound above by a geometric series is useful.
+\begin{SWP}{\thm}{(Ratio Test) Let $a_n \neq 0$. Then,
+\begin{enumerate}
+	\item If $r_n := \abs{\dfrac{a_{n + 1}}{a_n}} \leq q < 1$ for every $n \geq N$ for some $N$, then $\sum a_n$ converges.
+	\item If $r_n \geq 1$ for every $n \geq N$ for some $N$, then $\sum a_n$ does not converge.
+\end{enumerate}
+}\begin{enumerate}\item It is trivial to see that in this case, $\abs {a_{N + p}} \leq q^p \abs{a_N}$, hence $\sum \abs{a_n}$ is bounded above by a convergent geometric series.
+\item In this case, $a_n \not \to 0$.\end{enumerate}As required.\end{SWP}Observe that $\lim\limits_{n\to \infty} \abs{\frac{a_{n + 1}}{a_n}}$ need not exist for us to apply the ratio test. Just that the ratio should eventually be bounded above by some $q < 1$, or bounded below by $1$. However, in the case the limit exists, we can make similar statements.
+\begin{SNP}{\crl}Let $L = \lim\limits_{n\to\infty}\abs{\frac{a_{n + 1}}{a_n}}$. Then,
+\begin{enumerate}
+	\item If $L > 1$, then $\sum a_n$ does not converge.
+	\item If $L < 1$, then $\sum a_n$ converges.
+	\item If $L = 1$, we cannot conclude.
+\end{enumerate}
+\end{SNP}
+Statements 1 and 2 more or less directly follow from the previous theorem. For statement 3, consider the series $\sum \frac 1 n$ and $\sum \frac {1} {n^2}$. The former doesn't converge, the latter converges, and the ratio converges to 1 for both of them.
+
+There is another way to bound a series by a geometric series.
+\begin{SWP}{\thm}{(Root Test) If $r_n := \abs{a_n}^{\frac1 n} \leq q < 1$ for every $n \geq N$ for some $N$, then $\sum a_n$ converges.}Again, this means $\abs{a_n} \leq q^n$ for every $n \geq N$ thus bounding the series above by a geometric one.
+\end{SWP}
+This test also has its limit analog.
+\begin{SNP}{\crl}Suppose $\lim\limits_{n\to\infty} = L$. If $L < 1$, then $\sum a_n$ converges. If $L > 1$, then $\sum a_n$ does not converge. If $L = 1$, we cannot make any conclusions.
+\end{SNP}
+In both the ratio and root tests, we have implicitly assumed the following.
+\begin{SNP}{\ex}{Suppose $\sum \abs{a_n}$ converges. Then show that $\sum a_n$ converges. (Hint. A sequence converges iff it is Cauchy.)}
+\end{SNP}
+Finally we address the alternating series test.
+\begin{SWP}{\thm}{(Alternating Series / Leibniz Test) If $a_n \geq 0$ is monotone decreasing and $a_n \to 0$, then $\sum (-1)^{n + 1}a_n$, or
+$$
+a_1 - a_2 + a_3 - a_4 + \dots
+$$converges.}Observe that the quantities $a_1 - a_2, a_2 - a_3$ or $a_k - a_{k + 1}$ in general are all $\geq 0$. This will be useful.
+
+First consider the sum ending at a general even term
+\begin{align*}
+S_{2k} &= a_1 - a_2 + a_3 - a_4 + ... + a_{2k - 1} - a_{2k}\\
+       &\leq a_1 - a_2 + ... + a_{2k - 1}\\
+       &= a_1 - (a_2 - a_3) - (a_4 - a_5) - \dots - (a_{2k - 2} - a_{2k - 1})\\
+       &\leq a_1
+\end{align*}
+Further,
+$$
+S_{2(k + 1)} = S_{2k + 2} = S_{2k} + (a_{2k + 1} - a_{2k + 2}) \geq S_{2k}
+$$
+Thus $S_{2k}$ is increasing and bounded above by $S_1$. Thus $S_{2k}$ converges.
+
+Similarly consider the sum ending at a general odd term.
+\begin{align*}
+S_{2k + 1} &= a_1 - a_2 + a_3 - a_4 + \dots -a_{2k} + a_{2k + 1}\\
+           &\geq a_1 - a_2 + \dots + a_{2k - 1} - a_{2k}\\
+           &= (a_1 - a_2) + (a_3 - a_4) + (a_5 - a_6) + \dots (a_{2k - 1} - a_{2k})\\
+           &\geq (a_1 - a_2)
+\end{align*}
+Further,
+$$
+S_{2(k + 1) + 1} = S_{2k + 3} = S_{2k + 1} - (a_{2k + 2} - a_{2k + 3}) \leq S_{2k + 1}
+$$
+Thus $S_{2k + 1}$ is decreasing and bounded below by $S_2$. Thus $S_{2k + 1}$ converges.
+
+i.e., the sequences of partial sums upto odd and upto even terms both converge. Since $S_{2n + 1} - S_{2n} = a_{2n + 1} \to 0$, they both converge to the same limit.
+
+Therefore $S_n$ converges.
+\end{SWP}
+There's a subtle point to be noted here. If $S_{2n + 1} - S_{2n}$ does not go to $0$, then necessarily $a_n \not \to 0$ and the sum doesn't converge. Therefore,
+\begin{SNP}{\crl}Let $a_n$ be monotone decreasing with $a_n \geq 0$. Then $\sum (-1)^na_n$ converges if and only if $a_n \to 0$.
+\end{SNP}
+Of course, there is a lot more to say about series and sufficient conditions for convergence, but this will do for now.
+\AnswerSection
+\ans Recall a series $\sum a_n$ converges if and only if the sequence of its partial sums $S_n = \sum\limits_{k = 1}^{n}a_k$ converges. Further recall a sequence converges iff it is Cauchy.
+
+Suppose $\sum \abs{a_n}$ converges, thus the sequence $S_n := \sum\limits_{k = 1}^{n}\abs{a_k}$ is Cauchy. Consider the sequence $T_n = \sum\limits_{k = 1}^{n}a_k$. It suffices to show $T_n$ is Cauchy.
+
+Let $\epsilon > 0$. Since $S_n$ is Cauchy, there is some $N \in \bb N$  such that for every $m, n \geq N$, $\abs{S_m - S_n} < \epsilon$.
+
+Now consider $\abs{T_m - T_n}$ for $m, n \geq N$, with $n \geq m$.
+\begin{align*}
+\abs{T_n - T_m} &= \abs{\sum\limits_{k = m + 1}^{n}a_k}\\
+                &\leq \sum\limits_{k = m + 1}^{n}\abs{a_k}\\
+                &= S_n - S_m\\
+                &= \abs{S_n - S_m}\\
+                &< \epsilon
+\end{align*}
+Therefore $T_n$ is Cauchy and thus converges.
+\end{document}

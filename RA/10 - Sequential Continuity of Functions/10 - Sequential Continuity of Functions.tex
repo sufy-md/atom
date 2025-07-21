@@ -1,0 +1,35 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Sequential Continuity of Functions}
+\textbf{Prereqs} RA-07
+
+You're familiar with continuous functions as those ``which can be drawn without lifting your pen". Of course, this is not a rigorous classification; but intuitively it makes sense. Whenever we impose a definition, we want that definition to capture our intuition.
+
+Luckily for us, there are two ways we can do this. We'll look at the first one here.
+
+Suppose you're drawing the curve of some continuous function $f$ with your pen, and you want this curve to be perfectly accurate. You've crossed $x = 1$, you've crossed $x = 2$, and you're now approaching $x = 3$. As you do, do you ensure that your pen also moves toward $x = 3$? Of course, you want to be as accurate as possible!
+
+In other words, as you get closer to some $x_0$ on the $x-$axis, you also ensure you're getting closer to $f(x_0)$ on the $y-$axis. Where have we seen this idea of getting closer to a point before?
+
+\begin{SNP}{\dfn}{We say a function $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$ is \emph{continuous at} $x$ if for every sequence $x_n$ that converges to $x$, the sequence $f(x_n)$ converges to $f(x)$}
+\end{SNP}
+
+In other words, $f$ is continuous at $x$ if it preserves convergence at $x$.
+
+Observe that continuity is a pointwise property. Let me demonstrate with an example. Consider the function $f: \bb R \rightarrow \bb R$ given by
+$$
+f(x) = \begin{cases}
+	0 & x \in \bb Q\\
+	x & x \notin \bb Q
+\end{cases}
+$$
+and consider a sequence $x_n \rightarrow 0$. Any given $x_n$ can either be rational or irrational, so $f(x_n)$ is either $x_n$ or $0$. But since both $x_n \rightarrow 0$ and the constant sequence $0 \rightarrow 0$, we conclude that $x_n \rightarrow 0 \implies f(x_n) \rightarrow 0$ and therefore $f$ is continuous at $0$.
+
+How about some other value? If $x$ is an irrational number, we can approximate it with a rational sequence, in which case we'll get $f(x) = x$ but $f(x_n) \rightarrow 0 \neq x$, so $f$ is not continuous at any irrational.
+
+In fact, two can play at this game. If $x$ is a nonzero rational, we can instead approximate it with irrational numbers. In that case, $f(x) = 0$ but $f(x_n) \rightarrow x \neq 0$. Again, $f$ is not continuous at any nonzero rational.
+
+So $f$ is only continuous at one point! Absurd, isn't it? We started out with a reasonable quantification of our pen and paper idea of continuity, and it says that a function we can't even draw is continuous at a lone point?
+
+As it turns out, this definition of continuity (called \emph{sequential continuity}) is perfectly fine, and is \emph{equivalent} to another definition that appears ``more correct'' on the surface. Our intuition wasn't wrong, the definition and its consequences just tell us what our intuition failed to capture, and that's okay.
+\end{document}

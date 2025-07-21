@@ -1,0 +1,54 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Sequential Properties of R}
+\textbf{Prereqs} RA-06, RA-07
+
+We will now move forward to some properties of real-valued sequences. It is worth noting these properties are closely related to the completeness axiom, as you can find in RA-XX
+
+We will first look at a useful theorem.
+\begin{SWP}{\thm}{(Nested Intervals) Let $\{I_n\}_n$ be a sequence of intervals $I_n = [a_n, b_n]$ such that $I_{n + 1} \subset I_{n}$ and $b_n - a_n \rightarrow 0$. Then, there is some $x$ such that $\cap I_n = \{x\}$}Observe that in other words, if we have a decreasing sequence of intervals whose lengths coverge to $0$, then the intersection of these intervals has one and only one point. Yet again, in the rationals, where this point is supposed to be might have a hole.
+
+First we show that the intersection is nonempty. Consider the sequences of the left and right endpoints of the intervals, viz. $\{a_n\}_n$ and $\{b_n\}_n$. Notice that $\{a_n\}$ is monotone increasing, and $\{b_n\}$ is monotone decreasing. (that is, $a_1 \leq a_2 \leq a_3 \leq \dots$ and $\dots \leq b_3 \leq b_2 \leq b_1$)  
+
+We also know that $a_k \leq b_k$ for every fixed $k$. Thus for any $m$ we have
+$$
+a_1 \leq a_m \leq b_m \leq b_1
+$$
+That is, $\{a_n\}$ is bounded above by $b_1$ and $\{b_n\}$ is bounded below by $a_1$.
+
+By monotone convergence theorem, $a_n \rightarrow A$ and $b_n \rightarrow B$. We know $b_n - a_n \rightarrow 0$ so $B - A = 0$, i.e. $B = A =: L$ (say). We claim that this $L$ lies in the intersection and is the only point that does.
+
+To show that $L$ lies in the intersection is straightforward. We need to show $a_k \leq L \leq b_k$ for every $k$.
+
+From the proof of monotone convergence theorem (see RA-07) we know $L$ is the least upper bound of $\{a_n\}$ and thus $a_k \leq L$ for all $k$. Similarly $L$ is also the greatest lower bound of $\{b_n\}$ and thus $L \leq b_k$ for every $k$.
+
+Now suppose some $L + \epsilon$ lies in the intersection with $\epsilon > 0$ (we can proceed in a similar manner for $\epsilon < 0$). If it lies in the intersection, then $L + \epsilon \leq b_k$ for every $k$, but then that would make $L + \epsilon$ a lower bound of $\{b_n\}$, when $L$ was the greatest lower bound. We have a contradiction!\contra
+
+Therefore$$\intersect{n \in \bb N}I_n = \{L\}$$as required.
+\end{SWP}
+\newpage
+We will now have a look at another interesting property of $\bb R$.
+\begin{SNP}{\thm}{(Bolzano-Weierstrass) Every bounded sequence has a convergent subsequence}
+\end{SNP}
+The theorem for now will be treated as a direct consequence of the following theorem, however it admits another proof using Nested Intervals which I really encourage you to read (again, it will be in RA-XX).
+\begin{SWP}{\thm}{(Monotone Subsequence) Every sequence has a monotone subsequence}Consider a sequence $\{a_n\}$. We call a term $\{a_k\}$ a \emph{peak} if $a_{k + 1}, a_{k + 2} \dots$ are all smaller than $a_k$.
+
+Suppose first that our sequence has infinitely many peaks, $a_{n_1}, a_{n_2} \dots$ and so on. Since $a_{n_1}$ is a peak, we have $a_{n_1} \geq a_{n_2}$. Since $a_{n_2}$ is a peak, we have $a_{n_2} \geq a_{n_3}$. Inductively, we obtain
+$$
+a_{n_1} \geq a_{n_2} \geq a_{n_3} \geq \dots
+$$
+and hence a monotone decreasing subsequence.
+
+Now suppose otherwise that there are finitely many peaks with the last being at $a_N$ (if there are no peaks, consider the last peak to be at $a_0$)
+
+Consider the term $a_{n_1} := a_{N+1}$. This is not a peak since it is after the last peak. Thus there is some term $a_{n_2}$ after it such that $a_{n_2} \geq a_{n_1}$.
+
+But again, $a_{n_2}$ is not a peak, so there is some $a_{n_3}$ after it such that $a_{n_3} \geq a_{n_2}$. Inductively, we get
+$$
+a_{n_1} \leq a_{n_2} \leq a_{n_3} \leq \dots
+$$
+and hence a monotone increasing subsequence.
+\end{SWP}
+\begin{SWP}{\crl}{Bolzano-Weierstrass Theorem}Let $\{a_n\}$ be bounded. By monotone subsequence theorem, let $\{a_{n_k}\}$ be a monotone subsequence. This is also bounded. By monotone convergence theorem, $a_{n_k}$ converges.
+\end{SWP}
+\end{document}

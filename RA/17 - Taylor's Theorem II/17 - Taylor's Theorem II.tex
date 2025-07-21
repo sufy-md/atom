@@ -1,0 +1,139 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Taylor's Theorem II}
+\textbf{Prereqs} RA-16
+
+The information about how a function $f$ twists and turns near a point $x_0$ is stored in the derivatives $f'(x_0), f''(x_0) \ldots f^{(k)}(x_0) \ldots$ if they exist. Recall our second-order Extended Lagrange approximation
+$$
+f(x) \approx f(a) + (x - a)\cdot f'(a) + \dfrac{(x - a)^2}{2}\cdot f''(a)
+$$
+And observe that the RHS is a $2-$degree polynomial.
+$$
+P_2(x) = f(a) + (x - a)\cdot f'(a) + \dfrac{(x - a)^2}{2}\cdot f''(a)
+$$
+Here's what makes $P_2$ interesting. The polynomial and its derivatives upto order $2$ agree with $f$. Note that
+\begin{align*}
+P_2(x) &= f(a) + (x - a)\cdot f'(a) + \dfrac{(x - a)^2}{2}\cdot f''(a)\\
+P_2'(x) &= f'(a) + (x - a)\cdot f''(a)\\
+P_2''(x) &= f''(a)
+\end{align*}
+Hence at the point $x = a$,
+\begin{align*}
+P_2(a) &= f(a)\\
+P_2'(a) &= f'(a)\\
+P_2''(a) &= f''(a)
+\end{align*}
+i.e., the $0-$th, $1-$st and $2-$nd order curvatures of $P_2$ at $a$ agree precisely with that of $f$, so long as $f$ admits those derivatives.
+
+We're ready to ask the general question. Suppose $f$ is $k-$times differentiable. Does $f$ admit a $k-$degree polynomial $P_k$ such that
+$$
+f^{(m)}(a) = P_k^{(m)}(a)
+$$
+for every $0 \leq m \leq k$? The answer is yes, and the construction is outlined below.
+
+Suppose the following form for the required polynomial.
+$$
+P_k(x) = a_0 + a_1\cdot (x - a) + a_2\cdot (x - a)^2 + \ldots + a_k\cdot (x - a)^k
+$$
+$P_k(a) = f(a)$ immediately forces
+$$
+a_0 = f(a)
+$$
+Now consider some $m$ with $1 \leq m \leq k$ and consider $P_k^{(m)}(x)$. To know what $P_k^{(m)}$ looks like, it suffices to find out what happens to the term $a_n(x - a)^n$ when it is differentiated $m$ times.
+
+It is a rather simple verification that\begin{align*}(a_n(x - a)^n)^{(m)} &= a_n\cdot n \cdot (n - 1) \ldots (n + 1 - m)(x - a)^{n - m}\end{align*}
+Which simplifies as follows$$
+\begin{array}{l}
+n < m \text{ : } 0\\
+n = m \text{ : } a_m\cdot m!\\
+n > m \text{ : } \dfrac{a_n\cdot n!}{(n - m)!}(x - a)^{n - m}
+\end{array}
+$$
+Therefore $P_k^{(m)}$ is given by
+$$
+P_k^{(m)}(x) = a_m\cdot m! + \sum\limits_{n = m + 1}^{k}\dfrac{a_n \cdot n!}{(n - m)!}(x - a)^{n - m}
+$$
+which gives
+$$
+P_k^{(m)}(a) = a_m\cdot m!
+$$
+Here we enforce $f^{(m)}(a) = P_k^{(m)}(a)$. Hence,
+$$
+a_m = \dfrac{f^{(m)}(a)}{m!}
+$$
+Thus finally we obtain $P_k^{(m)}$
+\begin{align*}
+P_k^{(m)}(x) &= f(a) + (x - a)\cdot f'(a) + \dfrac{(x - a)^2}{2!}\cdot f''(a) + \ldots \\
+			 &= \sum\limits_{n = 0}^{k}\dfrac{f^{(n)}(a)}{n!}\cdot (x - a)^n
+\end{align*}
+Do you now see why there was a $2$ in the denominator alongside $h^2$ in RA-16?
+
+Now we ask the main question. Suppose $f$ is differentiable $k$ times near $a$. Then it admits a natural approximation near $a$ in the form of $P_k(x)$. We know that degree $1$ and degree $2$ approximations of this kind are in fact precise, if we just adjust the last term. Is this true for a general $k-$degree approximation?
+
+The answer is in the affirmative, and the proof mimics that of Extended Lagrange in RA-16. The precise formulation is provided below.
+\begin{SWP}{\thm}{(Taylor-Lagrange) Let $f:[a, b] \rightarrow \bb R$ be $k-$times differentiable on $(a, b)$, and let $f ,f', f'' \ldots f^{(k - 1)}$ be continuous on $[a, b]$. Then there is $c \in (a, b)$ such that
+$$
+f(b) = f(a) + (b - a)\cdot f'(a) + \ldots + \dfrac{(b - a)^{k - 1}}{(k - 1)!}\cdot f^{(k - 1)}(a) + \dfrac{(b - a)^k}{k!}\cdot f^{(k)}(c)
+$$}We will mimic the proof provided in RA-16.
+
+Define
+\begin{align*}	
+F(x) &= f(b) - f(x) - (b - x)\cdot f'(x) - \ldots - \dfrac{(b - x)^{k - 1}}{(k - 1)!}\cdot f^{(k - 1)}(x)\\
+     &= f(b) - f(x) - \sum\limits_{n = 1}^{k - 1}\dfrac{(b - x)^n}{n!}\cdot f^{(n)}(x)
+\end{align*}
+Now to take the derivative
+\begin{align*}
+F'(x) = - f'(x) - \sum\limits_{n = 1}^{k - 1}\paran{\dfrac{(b - x)^n}{n!}\cdot f^{(n)}(x)}'
+\end{align*}
+we need to use the product rule for the second term. The $n-$th term breaks into
+$$
+\dfrac{(b - x)^n}{n!}\cdot f^{(n + 1)}(x) - \dfrac{(b - x)^{n - 1}}{(n - 1)!}\cdot f^{(n)}(x)
+$$
+where the $-$ sign shows up because of the chain rule on the $(b - x)$ term. The derivative then becomes
+$$
+F'(x) = -f'(x) - \paran{\sum\limits_{n = 1}^{k - 1}\dfrac{(b - x)^n}{n!}\cdot f^{(n + 1)}(x)} + \paran{\sum\limits_{n = 1}^{k - 1}\dfrac{(b - x)^{n - 1}}{(n - 1)!}\cdot f^{(n)}(x)}
+$$
+The sharp eyed will notice that a reindexing on the first sum will simplify the expression.
+$$
+F'(x) = -f'(x) - \paran{\sum\limits_{n = 2}^{k}\dfrac{(b - x)^{n - 1}}{(n - 1)!}\cdot f^{(n)}(x)} + \paran{\sum\limits_{n = 1}^{k - 1}\dfrac{(b - x)^{n - 1}}{(n - 1)!}\cdot f^{(n)}(x)}
+$$
+Only the $n = k$ term in the first sum and the $n = 1$ term in the second sum survive, and the rest get cancelled. Thus
+\begin{align*}
+F'(x) &= - f'(x) - \dfrac{(b - x)^{k - 1}}{(k - 1)!}\cdot f^{(k)}(x) + f'(x)\\
+      &= - \dfrac{(b - x)^{k - 1}}{(k - 1)!}\cdot f^{(k)}(x)
+\end{align*}
+As before, $F(b) = 0$. Now if we let
+$$
+g(x) = F(x) - \paran{\dfrac{b - x}{b - a}}^k\cdot F(a)
+$$
+Then $g(a) = g(b) = 0$. Thus by Rolle's Theorem $g'(c) = 0$ for some $c \in (a, b)$. Differentiating $g$ we get
+$$
+g'(x) = F'(x) + k\cdot \dfrac{(b - x)^{k - 1}}{(b - a)^k}\cdot F(a)
+$$
+Substituting $g'(c) = 0$ and $F'(x)$ from above,
+\begin{align*}
+0 = -\dfrac{(b - c)^{k - 1}}{(k - 1)!}\cdot f^{(k)}(c) + k\cdot \dfrac{(b - c)^{k - 1}}{(b - a)^k}\cdot F(a)
+\end{align*}
+Transposing,
+\begin{align*}
+\dfrac{(b - c)^{k - 1}}{(k - 1)!}\cdot f^{(k)}(c) = k\cdot \dfrac{(b - c)^{k - 1}}{(b - a)^k}\cdot F(a)
+\end{align*}
+Since $c \in (a, b)$, $b - c \neq 0$ and we can safely remove it. We also know $k\cdot (k - 1)! = k!$. Thus,
+$$
+F(a) = \dfrac{(b - a)^k}{k!}\cdot f^{(k)}(c)
+$$
+Substituting back $F(a)$ from its definition,
+$$
+f(b) = f(a) + (b - a)\cdot f'(a) + \ldots + \dfrac{(b - a)^{k - 1}}{(k - 1)!}\cdot f^{(k - 1)}(a) + \dfrac{(b - a)^k}{k!}\cdot f^{(k)}(c)
+$$
+as stipulated.
+\end{SWP}
+Therefore, \emph{any} $k$ times differentiable function admits a natural $k-$degree polynomial approximation near a point of differentiability
+$$
+f(a + h) \approx f(a) + h\cdot f'(a) + \ldots + \dfrac{h^k}{k!}f^{(k)}(a)
+$$
+and the approximation is made precise by just adjusting the last term.
+$$
+f(a + h) = f(a) + h\cdot f'(a) + \ldots + \dfrac{h^k}{k!}f^{(k)}(c)
+$$
+\end{document}

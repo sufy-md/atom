@@ -1,0 +1,63 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Series I}
+\textbf{Prereqs} RA-07
+
+A series (or specifically, an infinite series) is essentially a sum of countably many terms. The axioms of $\bb R$ only define a sum of finitely many terms. Through series, we seek to define a sum of infinitely many terms.
+
+Let $a_n$ be a sequence. Then we define a new sequence, $S_n$, given by
+$$
+S_n = \sum\limits_{m = 1}^{n}a_m
+$$
+and we define the infinite sum as the limit of $S_n$.
+$$
+\sum\limits_{m = 1}^{\infty}a_m := \lim_{n\to \infty}S_n = \lim_{n\to \infty}\sum\limits_{m = 1}^{n}a_m
+$$
+In other words, the infinite sum
+$$
+a_1 + a_2 + a_3 + \ldots
+$$
+is defined as the limit of the sequence
+$$
+a_1, \space a_1 + a_2, \space a_1 + a_2 + a_3 \ldots
+$$
+which, at first glance, seems to make sense. And it does! If you want to evaluate an infinite sum by hand, this is the exact thing you will do. You'll take $a_1$, and then add $a_2$ (to obtain $S_2$), and then add $a_3$ (to obtain $S_3$) and so on until you get an overall idea of what the sum is ``doing''.
+
+\begin{SNP}{\dfn}A series $\sum a_n$ \emph{converges} if $S_n \to S$ for some $S$. The series \emph{diverges} if $S_n \to \pm \infty$.
+\end{SNP}
+\begin{SNP}{\xmp}Let $a_n = \dfrac{1}{2^n}$. Then the series $\sum a_n$ converges to $1$. Let $b_n = n$. Then the series $\sum b_n$ diverges. Finally let $c_n = (-1)^n$. Then the series $\sum c_n$ neither converges nor diverges.
+\end{SNP}
+When can we say that a series converges? Unfortunately, the answer is not straightforward. It is easy to sniff out when a series \emph{doesn't} converge. Suppose $a_n \not \to 0$ as $n \to \infty$. Can $\sum a_n$ converge?
+
+As a handwavy proof, suppose $\sum a_n$ converges, i.e. the sequence $S_n$ converges to some limit $S$. Consider a new sequence defined by $T_n = S_{n + 1}$.
+
+\begin{SNP}{\ex}{Does $T_n$ converge? Where? What is $T_n - S_n$ equal to? Does this converge? Where?}
+\end{SNP}
+\begin{SNP}{\thm}{If a series $\sum a_n$ converges, then $a_n \to 0$.}
+\end{SNP}
+
+This condition is only \textit{necessary}, not sufficient. What that means is, even if $a_n \rightarrow 0$, it may be the case that $S_n$ doesn't converge.
+
+\begin{SNP}{\xmp}Consider $a_n = \dfrac{1}{n}$. Then $\sum a_n$ doesn't converge. Write the $(2^k)$-th partial sums as follows
+\begin{align*}
+\sum\dfrac1 n&= 1 + \left(\dfrac1 2\right) + \left(\dfrac 1 3 + \dfrac 1 4\right) + \left(\dfrac 1 5 + \dfrac 1 6 + \dfrac 1 7 + \dfrac 1 8\right) + \ldots\\
+&\geq 1 + \left(\dfrac1 2\right) + \left(\dfrac 1 4 + \dfrac 1 4\right) + \left(\dfrac1 8 + \dfrac1 8 + \dfrac1 8 + \dfrac1 8\right) + \ldots\\
+&= 1 + \dfrac1 2 + \dfrac 1 2 + \dfrac1 2 + \ldots\\
+&= 1 + \sum\limits_{n = 1}^{\infty}\dfrac1 2\\
+&= \infty
+\end{align*}
+We will revisit this in the Condensation test and the Rearrangement Theorem.
+\end{SNP}
+It is in general hard to fully characterise converging series. An important class of examples are the geometric series $a_n = ar^{n - 1}$ with first term $a \neq 0$ and common ratio $r \neq 0$. (The identically $0$ series trivially converge).
+
+\begin{SWP}{\thm}{Let $a_n$ be a geometric series with $a_2 \neq 0$ (neither of $a$ or $r$ is $0$). Then, $\sum a_n$ converges if and only if $\abs{r} < 1$.}$(\rightarrow)$ Suppose $\sum a_n$ converges. Then $a_n \rightarrow 0$, or $ar^{n - 1} \rightarrow 0$. Since $a$ and $r$ are both $\neq 0$, we must have $r^{n - 1} \to 0$ and therefore $\abs{r} < 1$. For if $\abs{r} \geq 1$ then $\abs r^{n - 1} \geq 1$ and in this case $r^{n - 1}$ cannot converge to $0$.
+
+$(\leftarrow)$ Now suppose for contrapositive that $\abs r \geq 1$. As before, in this case $a_n \not \to 0$ and thus $\sum a_n$ doesn't converge.
+\end{SWP}
+
+So we have our first test for convergence -- geometric series with ratios whose absolute value is smaller than $1$ converge.
+
+This result is critical in proving the ratio test, a strong sufficient condition for convergence. We will look at that and other tests in RA-19.
+\AnswerSection
+\ans Yes, $T_n$ also converges to $S$. $T_n - S_n$ is equal to $a_{n + 1}$ by definition. Also, $T_n - S_n$ converges to $S - S = 0$. Thus $a_{n + 1}$ (and thus $a_n$) converges to $0$.
+\end{document}

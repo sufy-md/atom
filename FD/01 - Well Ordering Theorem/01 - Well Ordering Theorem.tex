@@ -1,0 +1,51 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Well Ordering Theorem}
+\textbf{Prereqs} FD-IND
+
+Here we will have a look at an interesting property of the natural numbers. As an example, consider the sets $[0, 1], (1, 2)$, and $(-\infty, 0)$ in $\bb R$
+
+The first set admits a minimum element -- $0$. The second set admits a \emph{greatest lower bound} -- $1$. Finally the third set is unbounded below.
+
+Take any nonempty subset of the natural numbers, say $\{3n \st n \in \bb N\}$. This has a minimum element, $3$. Keep trying nonempty subsets until you build an intuition for the following statement.
+
+\begin{SNP}{\thm}{Every nonempty subset of $\bb N$ has a minimum element}
+\end{SNP}
+
+We will present a proof in two parts. First, using induction, we will prove the property for finite nonempty subsets. Then we will generalise to all subsets.
+
+\begin{SWP}{\lm}{Every nonempty finite subset of $\bb N$ has a least element}
+We proceed by induction on the number of elements of a given finite $S \subset \bb N$. If $S$ has one element, i.e $S = \{m\}$, then $m$ is the least element of $S$.
+
+If $S$ has $2$ elements, then by totality of $<$ one of them must be minimum in $S$.
+
+Now suppose for some $k$, every subset $S$ of size $k$ has a least element, and let $S'$ be a subset of size $k + 1$. Indeed since $S'$ is nonempty, pick some $m' \in S'$ and consider $T := S' \setminus \{m'\}$. $T$ is therefore a subset of size $k$, and has a minimum element $m$ by induction hypothesis.
+
+Now finally $\{m, m'\}$ is a subset of $\bb N$ of size $2$ and again admits a minimum. This is the required minimum of $S$.
+\end{SWP}
+Essentially, our argument boiled down to
+$$
+\min (\text{set of size } k + 1) = \min(\text{set of size } k \text{ obtained by removing some }m, m)
+$$
+Now we are in position to prove the infinite case.
+\begin{smrg}
+\pf (Of Theorem 1.) Let $S \subset \bb N$ be nonempty. If $S$ is finite we are done. Otherwise, take $k \in S$ and consider the set
+\begin{align*}
+S' &= \{n \in S \st n \leq k\} \\
+&= S \cap \{n \in \bb N \st n \leq k\}
+\end{align*}
+i.e, those natural numbers which are smaller than or equal to $k$ and belong to $S$. $S'$ is nonempty because $k \in S'$. Further, $S'$ is finite. Thus $S'$ has a minimum element $m$. This is also the minimum element of $S$.\qed
+\end{smrg}
+\newpage
+We can in fact go the other way. The principle of mathematical induction states that let $P(k)$ be a statement depending on the natural number $k$. If $P(0)$ is true and $P(k) \implies P(k + 1)$ for every $k$, then $P(n)$ is true for every $n$.
+
+Suppose the Well Ordering Theorem is true. Suppose $P(0)$ is true, and $P(k) \implies P(k + 1)$. Can you show that $P(n)$ is true for every $n$?
+\begin{SNP}{\ex}{
+Show that Well Ordering Theorem implies Principle of Mathematical Induction (Hint. Use the above outline. Suppose that $P(k)$ is false for some $k > 0$, then the set $S$ of natural numbers for which $P$ is false is nonempty. Now what?)}
+\end{SNP}
+
+Indeed, Mathematical Induction and Well Ordering Theorem are \textbf{equivalent}. Neither of these can be proved without each other, and for discrete math we take these to be axioms.
+
+\AnswerSection
+\ans Let $S$ be the set $\{ k \in \bb N \st P(k) \text{ is false} \}$. Suppose for contradiction that $S$ is nonempty, so it admits a minimum $m$. We know $m \neq 0$ since we assumed $P(0)$ to be true. i.e, $m \geq 1$ or $m - 1 \geq 0$ and thus $m - 1$ is also natural. We know $m$ is the smallest $k$ for which $P(k)$ is false, therefore $P(m - 1)$ must be true. But we assumed $P(k) \implies P(k + 1)$ so $P(m)$ must also be true! $S$ must be an empty set.\qed
+\end{document}

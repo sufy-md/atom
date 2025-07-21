@@ -1,0 +1,31 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{$\bb R$ is complete}
+\textbf{Prereqs} RA-03, RA-02
+
+We are now ready to state a very fundamental property of $\bb R$.
+\begin{SNP}{\thm}{$\bb R$ is complete.}
+\end{SNP}
+The proof is irrelevant and depends on the construction of $\bb R$, for which I'll leave an outline. It can also be found in \cite{Rudin}. Let's see what completeness allows us to do.
+\begin{SNP}{\thm}{Let $x \in \bb{R}$ be such that $x > 0$ and let $n \in \bb{N}$. Then, there is some $y \in \bb{R}$ such that $y^n = x$ and $y > 0$}
+\end{SNP}
+The theorem states that every positive number admits an $n-$th root, whenever $n$ is natural. This already is something that we cannot say about $\bb{Q}$.
+
+Let's try to intuitively understand this. We know that $x^n$ is increasing for $n \in \bb{N}$. Suppose I know $y_1^n < x$, so my required $y$ is certainly larger than $y_1$. Suppose I also know $y_2^n > x$, so my required $y$ is certainly smaller than $y_2$. Now I can take the average of $y_1$ and $y_2$ and repeat this all over again.
+
+In formal terms, let $S := \{y \in \bb R_{\geq 0} \st y^n \leq x\}$. Certainly, $x + 1$ is an upper bound of $S$. Also $0 \in S$. $S$ thus admits a least upper bound $\alpha$.
+
+Any $\beta$ smaller than $\alpha$ is already in $S$ and thus $\beta^n < x$. Surprisingly, this goes the other way, if some $\beta$ satisfies $\beta ^ n < x$, I can be sure that $\beta < \alpha$ ($x^n$ is an increasing function!). So $\alpha^n$ cannot be smaller than $x$.
+
+What if $\beta > \alpha$? Any such $\beta$ is an upper bound of $S$. Take $\gamma = \frac{\alpha + \beta}{2}$. We know $\beta ^n$ cannot be smaller than $x$, otherwise $\beta \in S$ and it will contradict that $\alpha$ is an upper bound. If $\beta^n = x$, then $\gamma^n$ must be smaller than $x$ and $\gamma$ must lie in $S$, again contradicting that $\alpha$ is an upper bound of $S$. We are forced to accept that $\beta > \alpha \iff \beta^n > x$.
+
+What about $\alpha^n$? We already knew $\alpha^n$ cannot be smaller than $x$. From the preceding paragraph, $\alpha^n > x$ would mean $\alpha > \alpha$ which cannot happen.
+
+It must be the case that $\alpha^n = x$. 
+
+This proof is handwavy, the details can be found in \cite{Rudin}. The overall idea should be clear. We recognise that $x^n$ is an increasing function; so on the number line, our required $n-$th root must be sandwiched between those $y$ for which $y^n < x$, and those $y$ for which $y^n > x$.
+
+On the rational number line, there might be a hole where this sandwiched number is supposed to be. The completeness property ensures no such hole exists.
+\bibliography{../../refs}
+\bibliographystyle{plain}
+\end{document}

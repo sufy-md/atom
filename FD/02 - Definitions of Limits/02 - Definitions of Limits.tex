@@ -1,0 +1,78 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Definitions of Limits}
+Here we'll look at the definitions of statements of the form
+$$
+\lim_{x\rightarrow x_0} f(x) = L
+$$
+Where $x$ varies over the real numbers (or some subset), and $x_0$ and $L$ are either real numbers or $\pm \infty$
+
+The idea behind the definitions is simple. We'll essentially say ``however close you want $f(x)$ to be to $L$, that is achievable, provided $x$ is closer to $x_0$ than some threshold''.
+
+In the cases where $x_0$ and $L$ are $\infty$, being sufficiently close to $\infty$ is replaced by being sufficiently large. Let's see.
+
+\begin{SNP}{\dfn}{Let $x_0, L \in \bb R$ and $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$. Then, we say
+$$
+\lim_{x\rightarrow x_0} f(x) = L
+$$
+if for every $\epsilon > 0$, there is some $\delta > 0$ such that whenever
+$$
+x \in (x_0 - \delta, x_0 + \delta)
+$$
+then
+$$
+f(x) \in (L - \epsilon, L + \epsilon)
+$$}
+\end{SNP}
+Now let us see what happens when the independent variable is infinite.
+\begin{SNP}{\dfn}{Let $L \in \bb R$ and $f: \Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$. Then, we say
+$$
+\lim_{x\rightarrow \infty} f(x) = L
+$$
+if for every $\epsilon > 0$, there exists $M > 0$ in $\bb R$ such that whenever
+$$
+x > M
+$$
+then
+$$
+f(x) \in (L - \epsilon, L + \epsilon)
+$$}
+\end{SNP}
+Here, $x$ ``getting closer to'' $\infty$ is measured by letting $x$ be larger than an arbitrary number. Of course, $x \rightarrow -\infty$ can be similarly defined.
+\begin{SNP}{\dfn}{Let $x_0 \in \bb R$ and $f:\Omega \rightarrow \bb R$ with $\Omega \subseteq \bb R$. Then, we say
+$$
+\lim_{x\rightarrow x_0} f(x) = \infty
+$$
+if for every $N > 0$ there is some $\delta > 0$ such that whenever
+$$
+x \in (x_0 - \delta, x_0 + \delta)
+$$
+then
+$$
+f(x) > N
+$$}
+\end{SNP}
+Finally, we state the definition where both variables go to $\infty$.
+\begin{SNP}{\dfn}{Let $f:\Omega \rightarrow \bb R$ with $\Omega \subseteq R$. We say
+$$
+\lim_{x\rightarrow\infty}f(x) = \infty
+$$
+if for every $N > 0$, there is some $M > 0$ such that whenever
+$$
+x > M
+$$
+then
+$$
+f(x) > N
+$$}
+\end{SNP}
+Observe that every single one of these definitions can be replaced with a sequential counterpart. $x_0, L, $ and $f$ as above, note that the following definitions are respective equivalents of those stated above.
+\begin{SNP}{\dfn}{We say that $$\lim_{x\rightarrow x_0}f(x) = L$$ if for every $x_n \rightarrow x_0$, $f(x_n) \rightarrow L$}
+\end{SNP}
+\begin{SNP}{\dfn}{We say that $$\lim_{x\rightarrow \infty}f(x) = L$$ if for every $x_n \rightarrow \infty$, $f(x_n) \rightarrow L$}
+\end{SNP}
+\begin{SNP}{\dfn}{We say that $$\lim_{x\rightarrow x_0}f(x) = \infty$$ if for every $x_n \rightarrow x_0$, $f(x_n) \rightarrow \infty$}
+\end{SNP}
+\begin{SNP}{\dfn}{We say that $$\lim_{x\rightarrow \infty}f(x) = \infty$$ if for every $x_n \rightarrow \infty$, $f(x_n) \rightarrow \infty$}
+\end{SNP}
+\end{document}

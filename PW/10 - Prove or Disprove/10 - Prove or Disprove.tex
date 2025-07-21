@@ -1,0 +1,59 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{To be or Not to be II}
+Towards the end of the last discussion we explored counterexamples. I want to now shed some more light on `Prove or disprove' problems. It is unlilkely that I will put in a detailed example, because the $n \geq 3$ demonstrated everything very well. This discussion will be a bit more abstract.
+
+Prove or disprove problems come in many forms. A few I can think of:
+\begin{itemize}
+    \item If $r$ satisfies $P(r)$, is it true it satisfies $Q(r)$?
+    \item Suppose for $r$, $P(r)$ holds. Is it true that $Q(r)$ holds?
+    \item Suppose for $r$, $\neg Q(r)$. What can you say about $P(r)$?
+\end{itemize}
+
+Here, $r$ could be any mathematical object -- an invertible matrix, a set of polynomials, etc. and $P$ and $Q$ are mathematical statements that depend on the choice of the object.
+
+All the above statements allude to the same implication $\forall r$ $P(r) \implies Q(r)$, and you're being asked to check whether the implication holds or not.
+
+In case you want to show the implication does hold, you would ideally employ some proving technique, assume $P(r)$ holds (either for every $r$, or WLG for some specific $r$), and show $Q(r)$ holds.
+
+To show the implication is not true, it suffices to show its negation is true. So we negate the statement $\forall r \space P(r) \implies Q(r)$. Negating an implication is not as straightforward, so we replace it by its logical equivalent.
+$$\forall r \space (\neg P(r) \vee Q(r))$$
+
+Negation of the statement is thus
+$$\neg(\forall r \space (\neg P(r) \vee Q(r)))$$
+As we saw earlier, $\neg (\forall r \space P(r)) \equiv \exists r \space \neg P(r)$. Using this on our statement above, we obtain
+$$\exists r \space \neg (\neg P(r) \vee Q(r))$$
+
+Using de Morgan's laws, we finally obtain
+$$\exists r \space (P(r) \wedge \neg Q(r))$$
+
+Thus to show the original implication \textit{doesn't} hold, it suffices to establish the existence of just one $r$ for which $P(r)$ \textit{(ie, the hypothesis)} is true, \textbf{AND} $Q(r)$, \textit{(ie the conclusion)} is false. Since an implication states that whenever $P$ is true $Q$ must be so, the existence of such $r$ \textit{disproves} $\forall r \space P(r) \implies Q(r)$
+
+At the point in time you're reading this, you have very little exposition to math and as such I am not sure what examples I could include. Here are a few from high school math:
+\begin{enumerate}
+    \item $r$: a polynomial function in the set $\mathbb R[X]$. $P(r)$: $r$ is such that $\deg r \geq 1$. $Q(r)$: $r$ has atleast one real root.
+    \begin{itemize}
+        \item Counterexample : $r = X^2 + 1$
+    \end{itemize}
+    \item $r$: a pair $(a, b)$ of $n \times n$ matrices. $P(r)$: $a$ and $b$ are invertible. $Q(r)$: $a + b$ is invertible.
+    \begin{itemize}
+        \item Counterexample: $r = (I_n, -I_n)$.
+    \end{itemize}
+\end{enumerate}
+For the following examples, try to correctly recognise $r$, $P(r)$, and $Q(r)$.
+\begin{enumerate}
+    \item Every continuous everywhere function is differentiable somewhere. Counterexample - Weierstrass function.
+    \item The integral of the derivative of every differentiable function differs from it only by a constant. Counterexample - Volterra's function.
+    \item If an infinite series converges, every rearrangement of the series converges to the same value. Counterexample - the famous expansion of $\ln 2$, $\sum\limits_{n=1} ^\infty \dfrac {(-1)^{n+1}}{n}$.
+\end{enumerate}
+(I'm sorry for breaking your brain with the last two examples, but I hope you see the point.)
+
+\section*{Another Subtlety}
+If you're clever, you might be thinking ``wow, proving negations is easy, just find a counterexample!'' and well, yes, that's the gist.
+
+If you're too clever by about half, you'll think about some negation of a negation shenanigans and try to prove an implication with just one example.
+
+There are systems where you can do that, and those are precisely the $\text{WLG}$ arguments we talked about in PW-09. But obviously, that doesn't always work.
+
+This was a relatively short one because we've already talked about mostly everything and my examples are subject to your limited exposure to topics in math. Anyway, all this discussion should be sufficient to give you a fundamental idea to build upon in your upcoming lectures.
+\end{document}

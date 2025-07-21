@@ -1,0 +1,36 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{$\bb Q$ has holes}
+\textbf{Prereqs} RA-02
+
+It is well known that the square root of $2$ is not a rational number. In particular, one can say $\bb Q$ has a \emph{hole} at $\sqrt 2$. We will try to capture this idea in mathematical terms. i.e., we will try to rigorously define what exactly constitutes a \emph{hole}.
+
+Consider $S = \{x \in \bb Q \st x \geq 0 \text{ and } x^2 < 2\}$. This is clearly bounded above by $2$, for $x^2 < 2$ implies $x^2 < 4$, in turn implies $x < 2$. We don't worry about absolute value when taking square roots in the last step because $x \geq 0$.
+
+Recall in the examples in RA-02, we were able to find some number $\alpha$ such that nothing smaller than $\alpha$ was an upper bound of the set. Can we do the same here?
+
+As it turns out, the answer is no, we can't. In fact, we can \emph{prove} that $S$ has no least upper bound in $\bb Q$
+
+\begin{SWP}{\lm}{$S$ has no least upper bound in $\bb Q$}
+Let $p \in \bb Q$ be so that $p \geq 0$. We will observe a few things about $p$.
+
+First, $p^2 \neq 2$. In the case that $p^2 < 2$, $p \in S$. In the case that $p^2 > 2$, $p$ is an upper bound of $S$.
+
+We wish to show $p$ is not a least upper bound of $S$. We do so by exhibiting another upper bound of $S$ which is smaller than $p$. Let
+$$
+q = p - \dfrac{p^2 - 2}{p + 2} = \dfrac{2p + 2}{p + 2}
+$$
+
+Since $p^2 - 2 > 0$, we subtract a positive quantity from $p$ and thus $q < p$. $q$ is clearly $> 0$ because $p > 0$. Now observe
+\begin{align*}
+q^2 - 2 &= \dfrac{(2p+2)^2}{(p+2)^2} - 2\\
+		&= \dfrac{4p^2 + 8p + 4}{p^2 + 4p + 4} - 2\\
+		&= \dfrac{4p^2 + 8p + 4 - 2p^2 - 8p - 8}{(p + 2)^2}\\
+		&= \dfrac{2(p^2 - 2)}{(p + 2)^2}
+\end{align*}
+Again since $p^2 - 2 > 0$, we get that $q^2 - 2 > 0$, so $q$ is an upper bound of $S$!
+\end{SWP}
+
+Here, have some intuition. Consider the interval $[0, \sqrt 2]$ as a subset of $\bb R$. I know the least upper bound $\alpha$ has the property that any $x$ smaller than it satisfies $x^2 < 2$ (compare to above) and any $x$ greater than it satisfies $x^2 > 2$. The least upper bound is thus \emph{forced} to satisfy $x^2 = 2$. Since no such number exists in $\bb Q$, there's a \emph{hole} there.
+
+\end{document}

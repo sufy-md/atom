@@ -1,0 +1,166 @@
+\input{../../preamble}
+\begin{document}
+\titleheader{Mean Value Theorems}
+\textbf{Prereqs} RA-13, RA-14
+
+Here we will look at some remarkable consequences of the fact that differentiable functions are continuous. Recall that continuity alone gives us pretty interesting properties.
+
+For further discussion in this note, let $f: [a, b] \rightarrow \bb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$ unless something weaker is stated.
+
+\begin{SNP}{\dfn}A point $x_0 \in (a, b)$ is called a point of local minimum (resp. local maximum) if for some $h > 0$, $f(x_0)$ is the minimum (resp. maximum) value of $f$ in $(x_0 - h, x_0 + h)$.
+\end{SNP}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  % Axes
+  \draw[->] (0,0) -- (6.5,0) node[right] {$x$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+  % Sine curve
+  \draw[domain=0:6.2832, samples=200, smooth, blue]
+    plot (\x,{sin(\x r)});
+  % x-ticks and labels
+  \foreach \x/\xtext in {
+    % 0/$0$, 
+    1.5708/$\tfrac{\pi}{2}$, 
+    3.1416/$\pi$, 
+    4.7124/$\tfrac{3\pi}{2}$, 
+    6.2832/$2\pi$
+  }{
+    \draw (\x,0.1) -- (\x,-0.1) node[below] {\xtext};
+  }
+  % y-ticks and labels
+  \foreach \y in {-1,1}{
+    \draw (0.1,\y) -- (-0.1,\y) node[left] {$\y$};
+  }
+\end{tikzpicture}\\
+$f(x) = \sin(x)$ has a local maximum at $\frac \pi 2$ and a local minimum at $\frac {3\pi} 2$
+\end{center}
+We are now ready to have a look at a series of very useful theorems.
+\begin{SWP}{\thm}{(Fermat's Theorem) Let $f$ have a local minimum (or maximum) at some $x_0 \in (a, b)$. Then $f'(x_0) = 0$.}WLG let $x_0$ be a minimum for $f$. The proof for maximum is similar.
+
+Consider the exit slope limit
+$$
+f'(x_0) = \lim_{h \rightarrow 0^+}\frac{f(x_0 + h) - f(x_0)}{h}
+$$
+We know $f(x_0 + h) \geq f(x_0)$ since $x_0$ is a minimum, so the numerator is positive. We're also taking $h \rightarrow 0^+$ so that $h > 0$, thus the denominator is also positive. Hence overall we get $f'(x_0) \geq 0$.
+
+Now consider the entry slope limit
+$$
+f'(x_0) = \lim_{h \rightarrow 0^+}\frac{f(x_0) - f(x_0 - h)}{h}
+$$
+Here, the denominator is positive by similar reasoning as above. We know $f(x_0)$ is a local minimum, thus $f(x_0) \leq f(x_0 - h)$ so the numerator is negative. Hence overall $f'(x_0) \leq 0$.
+
+Combining the inequalities we get $f'(x_0) = 0$.
+\end{SWP}
+Isn't that neat? If a smooth function hits a high point in some neighborhood, then your pen should do a U-turn. We can generalise this -- that if a differentiable function repeats a value, it must have either stayed on that value or made a U-turn somewhere.
+
+This is one of the key theorems in Single Variable Calculus.
+\begin{SNP}{\thm}{(Rolle) If $f(a) = f(b)$, then there is some $c \in (a, b)$ for which $f'(c) = 0$.}
+\end{SNP}
+The theorem states that if something has gone up and came down an equal amount, then it has made at least one U-turn. There is one other case where the thing hasn't moved at all, which we capture in the following lemma.
+\begin{SWP}{\lm}{If $f$ is constant, then $f' \equiv 0$.}Consider the limit $$\lim_{h\rightarrow 0}\frac{f(x + h) - f(x)}{h}$$
+and suppose $f$ has some constant value $k$. The limit then becomes
+\begin{align*}
+\lim_{h \rightarrow 0}\frac{f(x + h) - f(x)}{h} &= \lim_{h \rightarrow 0}\frac{k - k}{h}\\ &= \lim_{h \rightarrow 0}\frac{0}{h}\\ &= 0
+\end{align*}
+Thus $f'$ is $0$ everywhere on $(a, b)$.
+\end{SWP}
+We are now ready to prove Rolle's Theorem.
+\begin{smrg}\textbf{Proof.} Suppose $f$ is constant on $[a, b]$. By the lemma, we're done.
+
+Now suppose $f$ is not constant. Since $f$ is continuous on $[a, b]$, it admits a local maximum and a local minimum. Since $f$ is not constant and $f(a) = f(b)$, one of these must lie in $(a, b)$ (If maximum lies at $a$ and minimum at $b$, $f(a) = f(b)$ forces $f$ to be constant).
+
+Let $c \in (a, b)$ be a local extremum. By Fermat's Theorem, $f'(c) = 0$.\qed
+\end{smrg}
+Let's informally define a quantity called the ``overall slope'' of $f$ over $[a, b]$ given by$$
+\frac{f(b) - f(a)}{b - a}
+$$
+Rolle's Theorem states that if the overall slope of $f$ is $0$, then the pen must have moved with a slope of $0$ at some point.
+
+We suspect that $0$ is not special here, and that the theorem should hold for any value of the overall slope. In other words, if the overall slope of the function is some quantity $m$, then the pen must've moved with slope $m$ at some point.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+  % Axes
+  \draw[->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+  \draw[->] (0,-1)   -- (0,4)   node[above] {$y$};
+  % f(x) = 0.5 x^2
+  \draw[domain=-2.5:2.5, samples=200, smooth, thick, blue]
+    plot (\x,{0.5*\x*\x}) node[above right] {$f(x)=\tfrac12x^2$};
+  % Secant line (y = x)
+  \draw[red, dashed, thick, domain=-0.5:3]
+    plot (\x,{\x});
+  % Tangent at x=1: y = x - 0.5
+  \draw[green!60!black, thick, domain=-0.5:3]
+    plot (\x,{\x - 0.5});
+  % Ticks
+  \foreach \x in {-3,-2,-1,1,2,3}{
+    \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
+  }
+  \foreach \y in {1,2,3}{
+    \draw (0.1,\y) -- (-0.1,\y) node[left] {$\y$};
+  }
+\end{tikzpicture}\\
+The overall slope matches the instantaneous slope at some point
+\end{center}
+\begin{SWP}{\thm}{(Lagrange Mean Value) There is some $c \in (a, b)$ such that
+$$
+f'(c) = \frac{f(b) - f(a)}{b - a}
+$$}We define a new function
+$$
+g(x) = f(x) - \left(\frac{f(b) - f(a)}{b - a}\right)(x - a)
+$$
+Which is essentially just $f - (\text{straight line of overall slope})$. Observe that $g(a) = f(a)$ and $g(b) = f(a)$. Further observe that $g$ is continuous on $[a, b]$, differentiable on $(a, b)$, and
+$$
+g'(x) = f'(x) - \paran{\frac{f(b) - f(a)}{b - a}}
+$$
+By Rolle's Theorem, $g'(c) = 0$ for some $c \in (a, b)$. Substituting, we get
+$$
+f'(c) = \frac{f(b) - f(a)}{b - a}
+$$
+as required.
+\end{SWP}
+
+Interestingly, Lagrange's Theorem provides a full converse to Lemma 1.
+\begin{SWP}{\thm}{If $f' \equiv 0$ on $(a, b)$, then $f$ is constant on $[a, b]$.}Let $x < y$ in $(a, b)$. Then by Lagrange's Theorem, there is some $c \in (x, y)$ such that
+$$
+f'(c) = \frac{f(y) - f(x)}{y - x}
+$$
+But $f' \equiv 0$ so $f'(c) = 0$. Hence $f(y) = f(x) = k$ on $(a, b)$.
+
+By continuity of $f$ at $a$ and $b$ it follows that $f(a) = f(b) = k$. Thus $f$ is constant on $[a, b]$.
+\end{SWP}
+
+Finally, we make another generalization. Suppose we let $h(x) = x$ (i.e $h'(x) = 1$), then Lagrange's Theorem reads \emph{there is some $c \in (a, b)$ such that $$\frac{f(b) - f(a)}{h(b) - h(a)} = \frac{f'(c)}{h'(c)}$$}Is $h(x) = x$ special? Or does any $h$ continuous on $[a, b]$ and differentiable on $(a, b)$ suffice?
+
+\begin{SNP}{\thm}{(Cauchy Mean Value) Let $h$ be as $f$. Then there is some $c \in (a, b)$ such that
+$$
+f'(c)(h(b) - h(a)) = h'(c)(f(b) - f(a))
+$$}
+\end{SNP}
+Observe we drop the quotient formulation because of the possibility that $f'(c)$ or $h'(c)$ could be $0$.
+\begin{smrg}\textbf{Proof.} Once again we define a new function
+$$
+g(x) = h(x)(f(b) - f(a)) - f(x)(h(b) - h(a))
+$$
+Observe that
+$$
+g(a) = f(a)h(b) - f(b)h(a) = g(b)
+$$
+And
+$$
+g'(x) = h'(x)(f(b) - f(a)) - f'(x)(h(b) - h(a))
+$$
+By Rolle's Theorem, $g'(c) = 0$ for some $c \in (a, b)$. Thus for the same $c$ we get that
+$$
+h'(c)(f(b) - f(a)) = f'(c)(h(b) - h(a))
+$$
+as required.\qed
+\end{smrg}
+
+These theorems bring out clean properties of smooth functions. Whether it curves, rises, or levels out, somewhere along the way, the instantaneous agrees with the average.
+
+You can't have an average speed of $40$kmph without ever hitting $40$kmph on your speedometer. You can't reach a point northwest of you without ever facing northwest at least once.
+
+We will encounter these again in Several Variable Calc, in Optimization, in Ordinary Differential Equations, and who knows where else. These are so simple and yet extremely useful, and lie at the heart of what makes Single Variable worth investigating.
+\end{document}

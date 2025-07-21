@@ -1,0 +1,40 @@
+ \input{../../preamble}
+\begin{document}
+\titleheader{Common Induction Mistakes}
+Not so much `mistakes' as it is examples of the kind of mistake I pointed out at the end of the last discussion. Let's have a look.
+
+\section*{All Horses are the Same Color}
+Let $P(n)$ be the statement \texttt{In any set of $n$ horses, all horses are the same color.}
+
+Then we make the following claim.
+\begin{SWP}{\asn}{$P(n)$ is true for all $n \geq 1$.}(Base Case) Let $n = 1$. Then any set of one horse has all horses the same color, since there is only one horse. Thus $P(1)$ is trivially true.
+
+(Induction Hypothesis) Assume $P(k)$ is true for some $k \geq 1$. That is, in any set of $k$ horses, all horses are the same color.
+
+(Completion) Consider a set of $k + 1$ horses, $H_1, H_2, \ldots, H_{k+1}$.
+
+By the induction hypothesis, the first $k$ horses, $H_1, H_2, \ldots, H_k$, are all the same color.
+
+Again by the induction hypothesis, the last $k$ horses, $H_2, H_3, \ldots, H_{k+1}$, are all the same color.
+
+Since $H_2$ is in both sets, it must be the case that all horses in the set of $k + 1$ horses are the same color.
+\end{SWP}
+Well? This argument seems to suggest that all horses are the same color, regardless of the number of horses. What went wrong?
+
+My process relies on removing one horse from the set and considering the colors of the remaining horses.
+
+However, this process \textit{fails} when proving $P(2)$ from $P(1)$ because when you remove just the one horse, there's nothing left.
+
+\begin{footnotesize}{Quick sidenote -- all horses being the same color in an empty set is a vacuously true statement. We will look at those in the final discussion.}
+\end{footnotesize}
+\section*{Small Offset}
+Let's have a look at one final example for induction.
+
+Suppose you set out to show that $\sum\limits_{k=1}^{n} k = \dfrac{n^2+n+2}{2}$. If you checked that $f(n+1) = f(n) + (n+1)$, you would find that equality holds and make your conclusion.
+
+Where you would go wrong, however, is checking the base case. You never light your string of crackers on fire, you just check that burning one will ignite the next.
+
+\section*{Conclusion}
+Light the fire. \textit{Check the base case}. That's all.
+
+\end{document}
